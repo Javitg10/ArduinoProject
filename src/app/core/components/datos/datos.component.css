@@ -1,0 +1,38 @@
+section {
+    padding: 60px 0;
+    margin-left: 10%;
+    margin-right: 10%;
+    border: 8px solid black;
+    border-radius: 6px;
+    color: black;
+}
+
+section .section-title {
+    text-align: center;
+    color: black;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+#tabs{
+	background: #ffcd6c;
+    color: black;
+}
+#tabs h6.section-title{
+    color: black;
+}
+
+#tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: black;
+    background-color: transparent;
+    border-color: transparent transparent black;
+    border-bottom: 4px solid !important;
+    font-size: 20px;
+    font-weight: bold;
+}
+#tabs .nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    color: black;
+    font-size: 20px;
+}

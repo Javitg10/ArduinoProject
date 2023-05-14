@@ -1,0 +1,70 @@
+<app-header></app-header>
+<br><br>
+<div class="text-center">
+<h1>Datos</h1>
+<hr style="color: black; margin-left: 25%; margin-right: 25% ; font-weight: bolder;" width="50%" >
+<br>
+<p class="text-start" style="margin-left: 20%; margin-right: 20% ;">En esta parte de nuestra web, podrás medirte en tiempo real tus movimientos musculares, mostrarlos aquí, para poder analizarlos y hasta si lo deseas, mostrarlos mediante una gráfica para verlo mucho más actualizado</p>
+
+<div class="container mt-5">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" href="#tab1" data-toggle="tab">Tab 1</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#tab2" data-toggle="tab">Tab 2</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#tab3" data-toggle="tab">Tab 3</a>
+      </li>
+    </ul>
+    <div class="tab-content mt-3">
+      <div class="tab-pane fade show active" id="tab1">
+        <h3>Tab 1 Content</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+          vehicula urna eget massa tempor, in accumsan sapien
+          scelerisque. Integer euismod aliquet est vel laoreet.
+        </p>
+      </div>
+      <div class="tab-pane fade" id="tab2">
+        <h3>Tab 2 Content</h3>
+        <p>
+          Duis vel ipsum ultrices, tempor augue vel, tristique leo.
+          Aenean quis mauris at ipsum bibendum suscipit. Duis faucibus
+          accumsan tortor ut lacinia.
+        </p>
+      </div>
+      <div class="tab-pane fade" id="tab3">
+        <h3>Tab 3 Content</h3>
+        <p>
+          Mauris ut elit in ligula vestibulum blandit. Pellentesque
+          habitant morbi tristique senectus et netus et malesuada fames
+          ac turpis egestas. Sed finibus odio vel ipsum lobortis
+          bibendum.
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- jQuery -->
+  <script
+    src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    $(document).ready(function() {
+        // Activate the first tab by default
+        $("#tab1").addClass("active");
+        $("#tab1-content").addClass("show active");
+
+        // Switch tabs
+        $(".nav-link").click(function(event) {
+            event.preventDefault();
+            $(this).tab("show");
+        });
+    });
+</script>
+<br>
+<br>
+<app-footer></app-footer>
