@@ -1,0 +1,16 @@
+.position-relative {
+    /* Agrega esta regla para asegurarte de que el div padre tenga posición relativa */
+    position: relative;
+  }
+  
+  .background-image {
+    /* Estilos para hacer que la imagen ocupe el 100% del div */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(5px); /* Aplica el efecto de desenfoque */
+    z-index: -1; /* Mueve la imagen detrás del contenido del div */
+  }  
