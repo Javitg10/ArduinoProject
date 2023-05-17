@@ -11,54 +11,63 @@
     <h6 class="section-title h1">Tabs</h6>
     <div class="row">
       <div class="col-xs-12">
-        <ul class="nav nav-tabs">
-       
+        <ul class="nav nav-tabs" id="tabs">
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#profile">Informacion</a>
+            <a class="nav-link active" href="#tab1" data-toggle="tab">Informacion</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#contact">Tabla de datos</a>
+            <a class="nav-link" href="#tab2" data-toggle="tab">Tabla de datos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#about">Gráfica</a>
+            <a class="nav-link" href="#tab3" data-toggle="tab">Grafica</a>
           </li>
         </ul>
-        <div class="tab-content">
-          <div class="tab-pane fade" id="profile">
-            <h3>Informacion</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem rerum mollitia accusantium voluptate ad doloribus a earum obcaecati alias, ipsam hic vitae consectetur optio tempora.</p>
+        <br>
+        <div class="tab-content justify-content-center">
+          <div class="tab-pane active" id="tab1">Contenido de la pestaña 1</div>
+          <div class="tab-pane" id="tab2">
+            <h1 class="text-center">Datos</h1>
+            <p class="text-center"> Se estan generando datos automaticamente desde la placa dearduino mediante tuss movimientos... Compruébalos en esta tabla</p>
+            <hr>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Dato</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>1</td>
+                  <td>21/07/2023 00:00:00.000</td>
+                  <td>1234</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>2</td>
+                  <td>21/07/2023 00:00:00.000</td>
+                  <td>900</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>3</td>
+                  <td>21/07/2023 00:00:00.000</td>
+                  <td>659</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <div class="tab-pane fade" id="contact">
-            <h3>Tabla de datos</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga cupiditate doloremque doloribus modi nesciunt itaque, asperiores, minima quidem provident unde inventore, dolorum earum vel.</p>
-          </div>
-          <div class="tab-pane fade" id="about">
-            <h3>Gráfica</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto odio porro aperiam nostrum labore soluta at harum numquam illum ab tempore, alias expedita vero ea.</p>
-          </div>
+          <div class="tab-pane" id="tab3">Contenido de la pestaña 3</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<ul class="nav nav-tabs">
-  <li class="elemento de navegación">
-    <a class="nav-link active" href="#tab1" data-toggle="tab">Pestaña 1</a>
-  </li>
-  <li class="elemento de navegación">
-    <a class="nav-link" href="#tab2" data-toggle="tab">Pestaña 2</a>
-  </li>
-  <li class="elemento de navegación">
-    <a class="nav-link" href="#tab3" data-toggle="tab">Pestaña 3</a>
-  </li>
-</ul>
 
-<div class="contenido-pestaña">
-  <div class="tab-pane active" id="tab1">Contenido de la pestaña 1</div>
-  <div class="tab-pane" id="tab2">Contenido de la pestaña 2</div>
-  <div class="tab-pane" id="tab3">Contenido de la pestaña 3</div>
-</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script>
