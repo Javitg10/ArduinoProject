@@ -43,23 +43,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>1</td>
-                  <td>21/07/2023 00:00:00.000</td>
-                  <td>1234</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>2</td>
-                  <td>21/07/2023 00:00:00.000</td>
-                  <td>900</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>3</td>
-                  <td>21/07/2023 00:00:00.000</td>
-                  <td>659</td>
+                <tr *ngFor="let dato of datos">
+                  <th scope="row">{{ dato.id }}</th>
+                  <td>{{ dato.fecha }}</td>
+                  <td>{{ dato.dato }}</td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
