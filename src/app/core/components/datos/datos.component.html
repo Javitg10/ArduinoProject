@@ -13,7 +13,7 @@
       <div class="col-xs-12">
         <ul class="nav nav-tabs" id="tabs">
           <li class="nav-item">
-            <a class="nav-link active" href="#tab1" data-toggle="tab">Informacion</a>
+            <a class="nav-link active" href="#tab1" data-toggle="tab">Información</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#tab2" data-toggle="tab">Tabla de datos</a>
@@ -24,7 +24,11 @@
         </ul>
         <br>
         <div class="tab-content justify-content-center">
-          <div class="tab-pane active" id="tab1">Contenido de la pestaña 1</div>
+          <div class="tab-pane active" id="tab1">
+            <div class="justify-content-center">
+              <h1>Arduino uno <hr></h1>
+            </div>
+          </div>
           <div class="tab-pane" id="tab2">
             <h1 class="text-center">Datos</h1>
             <p class="text-center"> Se estan generando datos automaticamente desde la placa dearduino mediante tuss movimientos... Compruébalos en esta tabla</p>
@@ -39,23 +43,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>1</td>
-                  <td>21/07/2023 00:00:00.000</td>
-                  <td>1234</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>2</td>
-                  <td>21/07/2023 00:00:00.000</td>
-                  <td>900</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>3</td>
-                  <td>21/07/2023 00:00:00.000</td>
-                  <td>659</td>
+                <tr *ngFor="let dato of datos">
+                  <th scope="row">{{ dato.id }}</th>
+                  <td>{{ dato.fecha }}</td>
+                  <td>{{ dato.dato }}</td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>

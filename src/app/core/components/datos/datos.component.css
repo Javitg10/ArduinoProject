@@ -9,12 +9,12 @@ section {
 
 section .section-title {
     text-align: center;
-    color: black;
+    color: white;
     margin-bottom: 50px;
     text-transform: uppercase;
 }
 #tabs{
-	background: #ffcd6c;
+	background: #00979C;
     color: black;
 }
 #tabs h6.section-title{
