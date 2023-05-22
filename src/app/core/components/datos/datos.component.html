@@ -5,7 +5,10 @@
 <hr style="color: black; margin-left: 25%; margin-right: 25% ; font-weight: bolder;" width="50%" >
 <br>
 <p class="text-start" style="margin-left: 20%; margin-right: 20% ;">En esta parte de nuestra web, podrás medirte en tiempo real tus movimientos musculares, mostrarlos aquí, para poder analizarlos y hasta si lo deseas, mostrarlos mediante una gráfica para verlo mucho más actualizado</p>
-
+<ul>
+  <li *ngFor="let valor of datos$ | async">{{ valor }}</li>
+</ul>
+<button (click)="ejecutarArchivo()">Ejecutar Archivo</button>
 <section id="tabs">
   <div class="container">
     <h6 class="section-title h1">Tabs</h6>
@@ -43,10 +46,10 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let dato of datos">
-                  <th scope="row">{{ dato.id }}</th>
-                  <td>{{ dato.fecha }}</td>
-                  <td>{{ dato.dato }}</td>
+                <tr>
+                  <th scope="row"></th>
+                  <td></td>
+                  <td></td>
                   <td></td>
                 </tr>
               </tbody>
