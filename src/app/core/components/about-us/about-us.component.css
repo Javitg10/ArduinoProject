@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Monrad'; 
+  src: url('/assets/monrad.ttf') format('truetype'); 
+}
+
+.selector {
+  font-family: 'Monrad', sans-serif; 
+}
 .position-relative {
     /* Agrega esta regla para asegurarte de que el div padre tenga posición relativa */
     position: relative;
