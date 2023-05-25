@@ -36,3 +36,28 @@ section .section-title {
     color: black;
     font-size: 20px;
 }
+#cabecera {
+    background-color: #00979C;
+    margin: 3%;
+    border-radius: 10px;
+    border: 3px solid black;
+    -webkit-box-shadow: 5px 5px 47px 17px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 5px 5px 47px 17px rgba(0, 0, 0, 0.75);
+    box-shadow: 5px 5px 47px 17px rgba(0, 0, 0, 0.75);
+  }
+  .hover-effect {
+    /* Estilos regulares del botón */
+    /* ... */
+  
+    /* Estilos para el efecto hover */
+    box-shadow: 0 0 0 transparent; /* Establece un borde inicial sin tamaño ni color */
+   
+    transition: box-shadow 0.3s ease; /* Transición suave de 0.3 segundos */
+  }
+  
+  .hover-effect:hover {
+    box-shadow: 0 0 0 5px black; /* Establece el tamaño y color del borde */
+    
+  }
+  
+  
