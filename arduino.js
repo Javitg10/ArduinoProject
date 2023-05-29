@@ -1,5 +1,5 @@
 const { SerialPort } = require('serialport');
-const app = require('../../../../../expressAPI');
+const app = require('./expressAPI');
 
 // Crear un array para almacenar los valores leídos
 let datos = [];

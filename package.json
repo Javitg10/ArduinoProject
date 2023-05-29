@@ -26,6 +26,7 @@
     "express": "^4.18.2",
     "mdb-ui-kit": "^6.3.0",
     "mdbootstrap": "^4.20.0",
+    "mysql": "^2.18.1",
     "os-browserify": "^0.3.0",
     "rxjs": "~7.5.0",
     "serialport": "^11.0.0",
