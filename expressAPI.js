@@ -48,11 +48,15 @@ comPort1.on('data', function (data) {
   // Parsear el valor del pin analógico
   let valor = parseInt(str);
 
-  // Mostrar el valor leído en la consola
-  console.log('Valor leído: ' + valor);
+  if (!isNaN(valor)) {
+    // Mostrar el valor leído en la consola
+    console.log('Valor leído: ' + valor);
 
-  // Guardar el valor en el array
-  datos.push(valor);
+    // Guardar el valor en el array
+    datos.push(valor);
+  }else{
+    
+  }
 
   // Obtener la fecha y hora actual con milisegundos
   const fechaHoraActual = new Date();
@@ -67,6 +71,23 @@ comPort1.on('data', function (data) {
     console.log('Valor insertado en la base de datos');
   });
   });
+
+  app.get('/api/datos', function (req, res) {
+    const query = 'SELECT * FROM lecturas';
+    connection.query(query, function (err, results) {
+      if (err) {
+        console.error('Error al obtener los datos de la base de datos:', err);
+        res.status(500).send('Error al obtener los datos de la base de datos');
+      } else {
+        res.json(results);
+      }
+    });
+  });
+
+  const port = 3000;
+  app.listen(port, function () {
+  console.log(`Servidor API iniciado en http://localhost:${port}`);
+});
 
 
 module.exports = app;

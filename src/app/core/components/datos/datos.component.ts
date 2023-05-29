@@ -1,7 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Chart, ChartOptions, ChartDataset } from 'chart.js';
 
+interface Lectura {
+  id: number;
+  valor: number;
+  fecha: string;
+}
 
 @Component({
   selector: 'app-datos',
@@ -9,50 +14,57 @@ import { Observable } from 'rxjs';
   styleUrls: ['./datos.component.css']
 })
 export class DatosComponent {
-  datos$: Observable<number[]>;
+  lecturas: Lectura[] = [];
+  data: number[] = [];
+  
+  constructor(private http: HttpClient) { }
 
-  constructor(private http: HttpClient) {
-    // Realizar una solicitud GET a la API REST y obtener los datos
-    let url = 'http://localhost:3000/api/datos'
-    this.datos$ = this.http.get<number[]>(url);
-  }
-
-  iniciarServidor() {
-    const url = 'http://localhost:3000';
-    this.http.get(url).subscribe(
-      response => {
-        console.log('Servidor iniciado correctamente');
+  obtenerDatos(): void {
+    this.http.get<Lectura[]>('http://localhost:3000/api/datos').subscribe(
+      (data) => {
+        this.lecturas = data;
       },
-      error => {
-        console.error('Error al iniciar el servidor', error);
+      (error) => {
+        console.error('Error al obtener los datos:', error);
       }
     );
+    this.http.get<number[]>('http://localhost:3000/api/datos').subscribe(
+    (data) => {
+      this.data = data;
+      this.crearGrafica();
+    },
+    (error) => {
+      console.error('Error al obtener los datos:', error);
+    }
+  );
   }
-
-  iniciarRecoleccionDatos() {
-    const url = 'http://localhost:3000/api/datos';
-    this.http.get<number[]>(url).subscribe(
-      data => {
-        console.log('Datos recibidos:', data);
-        // Aquí puedes realizar cualquier otra acción con los datos recibidos
-      },
-      error => {
-        console.error('Error al obtener los datos', error);
-      }
-    );
-  }
-  ejecutarArchivo() {
-    const url = 'http://localhost:3000/api/ejecutar-archivo'; // Reemplaza con la URL de tu servidor
-    fetch(url)
-      .then(response => {
-        if (response.ok) {
-          console.log('Archivo ejecutado correctamente');
-        } else {
-          console.error('Error al ejecutar el archivo');
+  crearGrafica(): void {
+    const canvas = document.getElementById('myChart') as HTMLCanvasElement;
+    const ctx = canvas.getContext('2d');
+  
+    if (ctx) {
+      const chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: this.data.map((_, index) => index.toString()),
+          datasets: [{
+            label: 'Datos desde Arduino',
+            data: this.data,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
         }
-      })
-      .catch(error => {
-        console.error('Error al ejecutar el archivo', error);
       });
+    }
   }
+
+  
 }

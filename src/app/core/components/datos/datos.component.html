@@ -14,8 +14,8 @@
       <li>{{ valor }}</li>
     </ul>-->
   <div class="d-flex justify-content-center ">
-    <button class="btn btn-primary hover-effect" (click)="iniciarServidor()">Iniciar Servidor</button>
-    <button class="btn btn-danger hover-effect" (click)="iniciarRecoleccionDatos()">Iniciar Recolección de Datos</button>
+    <button class="btn btn-primary hover-effect" >Iniciar Servidor</button>
+    <button class="btn btn-danger hover-effect" (click)="obtenerDatos()">Iniciar Recolección de Datos</button>
   </div>
   <br>
     <section id="tabs">
@@ -48,7 +48,7 @@
                 <p class="text-center"> Se estan generando datos automaticamente desde la placa dearduino mediante tuss
                   movimientos... Compruébalos en esta tabla</p>
                 <hr>
-                <table id="datosh" class="table table-striped"  *ngFor="let valor of datos$ | async">
+                <table id="datosh" class="table table-striped"  *ngFor="let lectura of lecturas">
                   <thead>
                     <tr>
                       <th scope="col">ID</th>
@@ -59,15 +59,15 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <th scope="row"></th>
-                      <td></td>
-                      <td style="font-weight: bolder;">{{ valor }}</td>
+                      <th scope="row">{{ lectura.id }}</th>
+                      <td>{{ lectura.fecha }}</td>
+                      <td style="font-weight: bolder;">{{ lectura.valor }}</td>
                       <td></td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              <div class="tab-pane" id="tab3">Contenido de la pestaña 3</div>
+              <div class="tab-pane" id="tab3"><canvas id="myChart" width="400" height="400"></canvas></div>
             </div>
           </div>
         </div>
