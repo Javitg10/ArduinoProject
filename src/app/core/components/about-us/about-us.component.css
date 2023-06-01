@@ -21,4 +21,17 @@
     object-fit: cover;
     filter: blur(5px); /* Aplica el efecto de desenfoque */
     z-index: -1; /* Mueve la imagen detrás del contenido del div */
-  }  
+  } 
+  .card-img-top{
+
+    height: 400px;
+    
+  }
+  .card{
+    border: 3px dotted black;
+    width: 90%;
+    height: 100%;
+    -webkit-box-shadow: 5px 5px 47px 17px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 5px 5px 47px 17px rgba(0, 0, 0, 0.75);
+    box-shadow: 5px 5px 47px 17px rgba(0, 0, 0, 0.75);
+  }
