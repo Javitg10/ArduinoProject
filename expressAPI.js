@@ -66,7 +66,7 @@ comPort1.on('data', function (data) {
   const query = 'INSERT INTO lecturas (valor, fecha) VALUES (?, ?)';
   connection.query(query, [valor, fechaHora], (err, results) => {
     if (err) {
-      console.error('Error al insertar en la base de datos:', err);
+      console.log('Error al insertar en la base de datos:');
     }
     console.log('Valor insertado en la base de datos');
   });
