@@ -14,7 +14,8 @@
       <li>{{ valor }}</li>
     </ul>-->
   <div class="d-flex justify-content-center ">
-    <button class="btn btn-primary hover-effect" >Iniciar Servidor</button>
+    <button class="btn btn-primary hover-effect"(click)="ejecutarCodigo()" >Conectar con Arduino</button>
+    <button class="btn btn-primary hover-effect"(click)="detenerEjecucion()" >Desconectar Arduino</button>
     <button class="btn btn-danger hover-effect" (click)="obtenerDatos()">Iniciar Recolección de Datos</button>
   </div>
   <br>
