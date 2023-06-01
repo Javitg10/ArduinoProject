@@ -76,19 +76,24 @@ body {
   box-shadow: 5px 5px 47px 17px rgba(0, 0, 0, 0.75);
 }
 .styled-list {
-    list-style-type: none; /* Elimina los estilos de viñetas predeterminados */
-    padding: 0; /* Elimina el espacio interno de la lista */
+    list-style-type: none; 
+    padding: 0;
   }
   
   .styled-list li {
-    position: relative; /* Establece una posición relativa para los elementos de la lista */
-    padding-left: 20px; /* Agrega un espacio a la izquierda para los elementos de la lista */
-    margin-bottom: 5px; /* Agrega un espacio entre cada elemento de la lista */
+    position: relative; 
+    padding-left: 20px; 
+    margin-bottom: 5px; 
   }
   
   .styled-list li::before {
-    content: "•"; /* Utiliza un punto como marcador personalizado */
-    position: absolute; /* Establece una posición absoluta para el marcador */
+    content: "••> "; 
+    position: absolute; 
     left: 0;
+  }
+  #entero{
+    width: 100%;
+    margin-left: 25%;
+
   }
   
