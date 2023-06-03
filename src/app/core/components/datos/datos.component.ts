@@ -18,7 +18,26 @@ export class DatosComponent {
   data: number[] = [];
   
   constructor(private http: HttpClient) { }
-
+  ejecutarCodigo(): void {
+    this.http.post('http://localhost:3000/enviar-datos', {}).subscribe(
+      response => {
+        console.log('Arduino conectado. Enviando datos...');
+      },
+      error => {
+        console.error('Error al enviar los datos', error);
+      }
+    );
+  }
+  detenerEjecucion(): void {
+    this.http.post('http://localhost:3000/detener-ejecucion', {}).subscribe(
+      response => {
+        console.log('Ejecución detenida correctamente');
+      },
+      error => {
+        console.error('Error al detener la ejecución', error);
+      }
+    );
+  }
   obtenerDatos(): void {
     this.http.get<Lectura[]>('http://localhost:3000/api/datos').subscribe(
       (data) => {
