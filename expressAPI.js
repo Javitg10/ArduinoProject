@@ -101,26 +101,23 @@ app.post('/detener-ejecucion', (req, res) => {
   
 });
 
-app.post('/detener-ejecucion', (req, res) => {
-  ejecucionActiva = false;
-  res.json({ message: 'Ejecución detenida' });
+
+
+app.get('/api/datos', function (req, res) {
+  const query = 'SELECT * FROM lecturas';
+  connection.query(query, function (err, results) {
+    if (err) {
+      console.error('Error al obtener los datos de la base de datos:', err);
+      res.status(500).send('Error al obtener los datos de la base de datos');
+    } else {
+      res.json(results);
+    }
+  });
 });
 
-  app.get('/api/datos', function (req, res) {
-    const query = 'SELECT * FROM lecturas';
-    connection.query(query, function (err, results) {
-      if (err) {
-        console.error('Error al obtener los datos de la base de datos:', err);
-        res.status(500).send('Error al obtener los datos de la base de datos');
-      } else {
-        res.json(results);
-      }
-    });
-  });
-
-  const port = 3000;
-  app.listen(port, function () {
-  console.log(`Servidor API iniciado en http://localhost:${port}`);
+const port = 3000;
+app.listen(port, function () {
+console.log(`Servidor API iniciado en http://localhost:${port}`);
 });
 
 

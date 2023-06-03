@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Chart, ChartOptions, ChartDataset } from 'chart.js';
+import { WebSocketSubject } from 'rxjs/webSocket';
+
 
 interface Lectura {
   id: number;
@@ -16,74 +17,60 @@ interface Lectura {
 export class DatosComponent {
   lecturas: Lectura[] = [];
   data: number[] = [];
-  
-  constructor(private http: HttpClient) { }
-  ejecutarCodigo(): void {
-    this.http.post('http://localhost:3000/enviar-datos', {}).subscribe(
-      response => {
-        console.log('Arduino conectado. Enviando datos...');
+  mensajeConexion: string = '';
+  private socket$: WebSocketSubject<Lectura>;
+
+  constructor(private http: HttpClient) {
+    this.socket$ = new WebSocketSubject('ws://localhost:3030'); // Establecer conexión WebSocket
+  }
+
+  conectarArduino(): void {
+    this.iniciarWebSocket();
+    this.http.post('http://localhost:3000/conectar_arduino', {}).subscribe(
+      (response: any) => {
+        this.mensajeConexion = response.mensaje;
       },
-      error => {
-        console.error('Error al enviar los datos', error);
+      (error: any) => {
+        console.error(error);
       }
     );
   }
-  detenerEjecucion(): void {
-    this.http.post('http://localhost:3000/detener-ejecucion', {}).subscribe(
-      response => {
-        console.log('Ejecución detenida correctamente');
+  desconectarArduino(): void {
+    this.detenerWebSocket();
+    this.http.post('http://localhost:3000/desconectar_arduino', {}).subscribe(
+      (response: any) => {
+        this.mensajeConexion = response.mensaje;
       },
-      error => {
-        console.error('Error al detener la ejecución', error);
+      (error: any) => {
+        console.error(error);
       }
     );
   }
   obtenerDatos(): void {
-    this.http.get<Lectura[]>('http://localhost:3000/api/datos').subscribe(
-      (data) => {
-        this.lecturas = data;
+    this.http.post('http://localhost:3000/api/datos', {}).subscribe(
+      (response: any) => {
+        this.mensajeConexion = response.mensaje;
       },
-      (error) => {
-        console.error('Error al obtener los datos:', error);
+      (error: any) => {
+        console.error(error);
       }
     );
-    this.http.get<number[]>('http://localhost:3000/api/datos').subscribe(
-    (data) => {
-      this.data = data;
-      this.crearGrafica();
-    },
-    (error) => {
-      console.error('Error al obtener los datos:', error);
-    }
-  );
   }
-  crearGrafica(): void {
-    const canvas = document.getElementById('myChart') as HTMLCanvasElement;
-    const ctx = canvas.getContext('2d');
-  
-    if (ctx) {
-      const chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: this.data.map((_, index) => index.toString()),
-          datasets: [{
-            label: 'Datos desde Arduino',
-            data: this.data,
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true
-            }
-          }
-        }
-      });
-    }
+  iniciarWebSocket() {
+    // Escuchar eventos de actualización de datos
+    this.socket$.subscribe(
+      (lectura) => {
+        this.lecturas.push(lectura); // Agregar nueva lectura al array
+      },
+      (error) => {
+        console.error('Error en la conexión WebSocket:', error);
+      }
+    );
   }
 
-  
+  detenerWebSocket() {
+    if (this.socket$) {
+      this.socket$.complete(); // Cerrar la conexión WebSocket 
+    }
+  }
 }
