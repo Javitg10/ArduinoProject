@@ -23,7 +23,7 @@ export class DatosComponent {
   constructor(private http: HttpClient) {
     this.socket$ = new WebSocketSubject('ws://localhost:3030'); // Establecer conexión WebSocket
   }
-
+  
   conectarArduino(): void {
     this.iniciarWebSocket();
     this.http.post('http://localhost:3000/conectar_arduino', {}).subscribe(
@@ -34,6 +34,7 @@ export class DatosComponent {
         console.error(error);
       }
     );
+    
   }
   desconectarArduino(): void {
     this.detenerWebSocket();
@@ -60,7 +61,8 @@ export class DatosComponent {
     // Escuchar eventos de actualización de datos
     this.socket$.subscribe(
       (lectura) => {
-        this.lecturas.push(lectura); // Agregar nueva lectura al array
+        this.lecturas.push(lectura);
+        console.log(lectura) // Agregar nueva lectura al array
       },
       (error) => {
         console.error('Error en la conexión WebSocket:', error);

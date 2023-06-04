@@ -26,6 +26,35 @@ function conectar_arduino() {
     comPort1.on('error', function (err) {
         console.error('Error al conectar: ', err.message);
       });
+    comPort1.on('data', function (data) {
+  
+      // Convertir el buffer recibido a un string
+      let str = data.toString();
+
+      // Parsear el valor del pin analógico
+      let valor = parseInt(str);
+
+      if (!isNaN(valor)) {
+          // Mostrar el valor leído en la consola
+          console.log('Valor leído: ' + valor);
+
+          
+          // Obtener la fecha y hora actual con milisegundos
+          const fechaHoraActual = new Date();
+          const fechaHora = fechaHoraActual.toISOString().slice(0, 23).replace('T', ' ');
+
+          const lectura = {
+              id: datos.length + 1,
+              valor: valor,
+              fecha: fechaHora
+          };
+
+          datos.push(lectura);
+          console.log(datos);
+          enviarActualizaciones();
+      }
+    })
+    
 }
 
 function desconectar_arduino(){
@@ -56,33 +85,7 @@ app.post('/desconectar_arduino', (req, res) => {
 });
 
 app.post('/api/datos', function (req, res) {
-    comPort1.on('data', function (data) {
     
-        // Convertir el buffer recibido a un string
-        let str = data.toString();
-  
-        // Parsear el valor del pin analógico
-        let valor = parseInt(str);
-  
-        if (!isNaN(valor)) {
-            // Mostrar el valor leído en la consola
-            console.log('Valor leído: ' + valor);
-
-            
-            // Obtener la fecha y hora actual con milisegundos
-            const fechaHoraActual = new Date();
-            const fechaHora = fechaHoraActual.toISOString().slice(0, 23).replace('T', ' ');
-
-            const lectura = {
-                id: datos.length + 1,
-                valor: valor,
-                fecha: fechaHora
-            };
-
-            datos.push(lectura);
-            enviarActualizaciones();
-        }
-    })
     res.json({ mensaje: 'Leyendo datos...' });
 });
 
@@ -92,10 +95,10 @@ console.log(`Servidor API iniciado en http://localhost:${puerto}`);
 });
 
 wss.on('connection', (ws) => {
-    ws.on('message', (message) => {
-      // Recibir mensajes del cliente (si es necesario)
-    });
-    ws.send(JSON.stringify(datos));
+  ws.send(JSON.stringify(datos)); // Enviar los datos existentes al cliente recién conectado
+  ws.on('message', (message) => {
+    // Recibir mensajes del cliente (si es necesario)
+  });
 });
 
 

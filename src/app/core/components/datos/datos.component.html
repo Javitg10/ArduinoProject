@@ -50,7 +50,7 @@
                 <p class="text-center"> Se estan generando datos automaticamente desde la placa dearduino mediante tuss
                   movimientos... Compruébalos en esta tabla</p>
                 <hr>
-                <table id="datosh" class="table table-striped"  *ngFor="let lectura of lecturas">
+                <table id="datosh" class="table table-striped">
                   <thead>
                     <tr>
                       <th scope="col">ID</th>
@@ -60,7 +60,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr *ngFor="let lectura of lecturas">
                       <th scope="row">{{ lectura.id }}</th>
                       <td>{{ lectura.fecha }}</td>
                       <td style="font-weight: bolder;">{{ lectura.valor }}</td>
