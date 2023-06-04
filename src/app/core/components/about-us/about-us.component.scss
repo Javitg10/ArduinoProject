@@ -1,0 +1,266 @@
+@font-face {
+  font-family: 'Monrad'; 
+  src: url('/assets/monrad.ttf') format('truetype'); 
+}
+
+.selector {
+  font-family: 'Monrad', sans-serif; 
+}
+.position-relative {
+    /* Agrega esta regla para asegurarte de que el div padre tenga posición relativa */
+    position: relative;
+  }
+  
+  .background-image {
+    /* Estilos para hacer que la imagen ocupe el 100% del div */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(5px); /* Aplica el efecto de desenfoque */
+    z-index: -1; /* Mueve la imagen detrás del contenido del div */
+  } 
+  .card-img-top{
+
+    height: 400px;
+    
+  }
+  .card{
+    border: 3px dotted black;
+    width: 90%;
+    height: 100%;
+    -webkit-box-shadow: 5px 5px 47px 17px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 5px 5px 47px 17px rgba(0, 0, 0, 0.75);
+    box-shadow: 5px 5px 47px 17px rgba(0, 0, 0, 0.75);
+  }
+
+.demo{ 
+  background: #92374d; 
+  opacity: 0;
+  border: 5px solid black;
+  margin-left: 2%;
+  margin-bottom: 200px;
+  width: 60%;
+  height: 300px;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  animation: slideInLeft 1s forwards;
+}
+.testimonial{
+  height: 290px;
+}
+.testimonial .pic{
+    width: 22%;
+    padding: 20px 0;
+    margin: 3% 6% 0 2%;
+    float: left;
+    position: relative;
+    z-index: 1;
+}
+.testimonial .pic:before,
+.testimonial .pic:after{
+    content: "";
+    width: 130px;
+    height: 150px;
+    background: #e1c37d;
+    position: absolute;
+    z-index: -1;
+}
+.testimonial .pic:before{
+    top: 0;
+    right: -20px;
+}
+.testimonial .pic:after{
+    bottom: 0;
+    left: -20px;
+}
+.testimonial .pic img{
+    width: 100%;
+    height: auto;
+    border: 3px solid #e1c37d;
+}
+.testimonial .testimonial-content{
+    width: 70%;
+    float: right;
+}
+.testimonial .title{
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+    text-transform: uppercase;
+    padding-top: 65px;
+    padding-left: 15px;
+}
+.testimonial .post{
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 27px;
+    color: #fff;
+    text-transform: capitalize;
+    margin-bottom: 25px;
+    padding-left: 15px;
+}
+.testimonial .description{
+    font-size: 16px;
+    color: #fff;
+    padding: 0 15px;
+    margin: 0;
+    position: relative;
+}
+.testimonial .description:before,
+.testimonial .description:after{
+    font-family: "Font Awesome 5 Free"; font-weight: 900;
+    font-size: 17px;
+    color: #e1c37d;
+    position: relative;
+}
+.testimonial .description:before{
+    content: "\f10d";
+    margin-right: 5px;
+    top: 0;
+    left: 0;
+}
+.testimonial .description:after{
+    content: "\f10e";
+    margin-left: 5px;
+    position: relative;
+    bottom: 0;
+    right: 0;
+}
+.owl-theme .owl-controls{
+    width: 70%;
+    margin: 0;
+    text-align: left;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.owl-theme .owl-controls .owl-buttons div{
+    width: 70px;
+    height: 90px;
+    line-height: 90px;
+    background: transparent;
+    border-radius: 0;
+    opacity: 1;
+    position: relative;
+}
+.owl-prev:before,
+.owl-next:before{
+    content: "\f177";
+    font-family: "fontawesome";
+    font-size: 45px;
+    font-weight: 900;
+    color: #ddd;
+    position: absolute;
+    top: 0;
+    left: 25%;
+}
+.owl-next:before{
+    content: "\f178";
+}
+.owl-next:after{
+    content: " / ";
+    font-size: 40px;
+    color: #ddd;
+    position: absolute;
+    top: 0;
+    left: -10px;
+}
+@media only screen and (max-width: 990px){
+    .testimonial{ text-align: center; }
+    .testimonial .pic{
+        width: 200px;
+        margin: 0 auto;
+        float: none;
+    }
+    .testimonial .pic:before,
+    .testimonial .pic:after{
+        width: 80px;
+        height: 100px;
+    }
+    .testimonial .testimonial-content{
+        width: 100%;
+        float: none;
+    }
+    .testimonial .title{
+        padding: 15px 0 0 0;
+    }
+    .testimonial .post{
+        padding: 0;
+        margin-bottom: 10px;
+    }
+    .owl-theme .owl-controls{
+        width: 100%;
+        position: static;
+        text-align: center;
+    }
+    .owl-theme .owl-controls .owl-buttons div{
+        height: 50px;
+        line-height: 50px;
+    }
+}
+
+.btn {
+  background-color: aqua;
+  color: black;
+  border: 1px solid black;
+  padding: 10px 20px;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+
+.btn:hover {
+  font-weight: bolder;
+  background-color: green;
+  color: white;
+  transform: scale(1.1);
+  border: 2px solid white;
+}
+
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+
+.demo2 {
+  background: #92374d;
+  margin-top: -8%;
+  opacity: 0;
+  border: 5px solid black;
+  align-content: end;
+  margin-left: 38%;
+  margin-right: 2%;
+  margin-bottom: 200px;
+  width: 60%;
+  height: 300px;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  animation: slideInRight 1s forwards; /* Cambiar a slideInRight */
+}
+
+@keyframes slideInRight { /* Cambiar a slideInRight */
+  0% {
+    transform: translateX(100%); /* Cambiar a translateX(100%) */
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+
+
