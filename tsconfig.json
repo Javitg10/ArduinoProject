@@ -2,6 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "types": ["chart.js"],
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",

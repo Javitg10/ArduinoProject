@@ -157,5 +157,21 @@
     width: 100%;
     margin-left: 25%;
 
+
   }
+  
+  .carousel-item img {
+    object-fit: cover;
+    height: 400px; /* Ajusta la altura según sea necesario */
+  }
+  
+  .carousel-indicators li {
+    background-color: #0080FF; /* Cambia el color de los indicadores */
+  }
+  
+  .carousel-control-prev-icon {
+    transform: scaleX(-1); /* Invierte el icono para el control previo */
+  }
+  
+  /* Agrega estilos adicionales según tus preferencias y diseño */
   
