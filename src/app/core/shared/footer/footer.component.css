@@ -1,7 +1,7 @@
 footer {
     
     bottom: 0;
-    background-color: #002D3C;
+    background-color: #92374d;
   }
 
   p {
@@ -11,3 +11,11 @@ footer {
   a {
     text-decoration: none;
   }
+  .social-icons {
+    display: flex;
+  }
+  
+  .social-icons a {
+    margin-right: 10px;
+  }
+  

@@ -1,8 +1,8 @@
 <app-header></app-header>
 <br><br>
 <div class="text-center"  id="cabecera" ><br>
-<h1>Página principal</h1>
-<hr style="color: black; margin-left: 25%; margin-right: 25% ; font-weight: bolder;" width="50%" >
+<h1>Página principal <hr style="height: 5px; color: black; background-color: black; border: none;"></h1>
+
 <p class="text-center" id="centrado">¿Que encontrarás en nuestra web?, encontrarás la manera más sencilla de poder medir, electromiográficamente, tus músculos, al flexionarse o estar en movimiento.
     ¿para que te servirá esto?, pues principalmente, verás como actúan tus músculos a grandes cargas de flexión, movimiento y demás aspectos, viendolo reflejado como lo desees, ya sea mediante una gráfica
     o mediante una tabla de valores donde podrás encontrar hasta el milisegundo donde se produjo la flexión o la variación de los datos que puede marcarte una lesión y conseguir ver su alcance.
@@ -11,29 +11,53 @@
 </div>
 <br>
 <br>
-<div id="content">
+<section>
+    <div class="section-title-one">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="text-center">
+                <div class="content">
+                  <h2 class="fw-bold text-center" style="color: white;">Las Competencias</h2>
+                  <p style="color: white;">
+                   Creemos que es importante que se conozca el porqué de las cosas, que hemos utilizado, como y porqué realizamos esta web. En todo proyecto se deben de conocer las competencias de cada uno de los puntos a seguir y aquí te las exponemos.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button class="btn btn-primary" (click)="showCards()" >Nuestras competencias</button>
+      </div>
+      <br>
+
+<div id="content" *ngIf="showCardSection">
 
     <div class="one">
         <h3 class="section-title">¿Que buscamos lograr??</h3>
-        <p>Buscamos facilitar la electromiografía mediante un método que hasta ahora no se ha obtenido y es trasladando los datos a una web, además de usar una placa de arduino y demás elementos para formar un circuito.</p>
+        <br><br>
+        <p>Buscamos facilitar la electromiografía mediante un método que hasta ahora no se ha desarrollado al completo y es trasladando los datos a una web, mediante el uso de una placa de arduino y demás elementos para formar un circuito, que después de estar conectado y recibir señal, se conectará mediante JS a la placa para recoger datos, enviarlos a una base de datos y que con eso se pueda utilizar para mostrar en la página web o simplemente como muestreo.</p>
         <br>
         <p>Todo esto es parte de un TFG de el CFGS Desarrollo de Aplicaciones Multiplataforma, realizado por nosotros, dos jóvenes informáticos que estamos empezando a desarrollar nuestras capacidades.</p>
     </div>
     <div class="two">
-        <h3 class="section-title">¿Que tecnologías utilizamos?</h3>
-        <div class="justify-content-center">
-        <ul class="styled-list " >
-            <li> Arduino Uno</li>
-            <li> Angular</li>
-            <li> Bases de Datos</li>
-            <li> HTML</li>
-            <li> CSS</li>
-            <li> Electrodos</li>
-            <li> Cableado</li>
-            <li> etc</li>
-          </ul>
-        </div>
-    </div>
+  <h3 class="section-title">¿Qué tecnologías utilizamos?</h3>
+    <ul class="styled-list">
+      <li>Arduino Uno</li>
+      <li>Sensor EMG</li>
+      <li>Angular</li>
+      <li>Bases de Datos</li>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>Electrodos</li>
+      <li>Cableado</li>
+      <li>etc</li>
+    </ul>
+</div>
+
     <div class="three">
         <h3 class="section-title">Ideas de proyecto</h3>
         <p>Las principales ideas que tuvimos para realizar este proyecto pasaron desde poder hacer una aplicaion móvil a una aplicacion web como con lo que contamos a día de hoy y por lo que decantamos el enfoque,
@@ -41,20 +65,28 @@
         </p>
     </div>
     <div class="four">
-        <h3 class="section-title">Ni idea</h3>
+        <h3 class="section-title">Arduino y la Electromiografía</h3>
+        <p>Como no, y como lo más importante de todo, hemos de conocer con que trabajamos y que estamos utilizando, por ello aquí hay un poco de historia de Arduino y de la Electromiografía</p>
+
+        <h3 class="section-title">Arduino</h3>
+        <p>Arduino nació en 2005 en el Instituto de Diseño Interactivo de Ivrea, Italia, con el propósito de ser una placa de bajo coste para su uso en aulas. Originalmente, el proyecto era interno de la escuela, pero cuando el instituto cerró, decidieron liberarlo al público para permitir su evolución colaborativa. Los principales responsables del diseño y la idea de Arduino fueron Massimo Banzi, David Cuartielles, David Mellis, Tom Igoe y Gianluca Martino.</p>
+        <h3 class="section-title">Electromiografía</h3>
+        <p>La electromiografía (EMG) es una técnica de registro gráfico de la actividad eléctrica generada por los músculos esqueléticos. Esta actividad eléctrica se puede medir mediante electrodos intramusculares o electrodos superficiales colocados en la piel sobre el músculo. El EMG se utiliza en estudios científicos para investigar el sistema neuromuscular, en el diagnóstico de enfermedades neuromusculares por parte de médicos, y en la monitorización de la activación muscular en fisioterapia.</p>
     </div>
     <div class="five" id="violeta">
         <h3 class="section-title">Conclusión</h3>
         <p>Como conclusión a este proyecto sacamos una grandísima autoformación a cerca de arduino, cosa que jamás habíamos visto tan a fondo, además es de destacar que hemos obtenido conocimientos de 
-            Front-end, en ciertos aspectos que no conocíamos y que nos parecen bastante interesantes, como el propio hecho de hacer una conexión o un servidor mediante JS o simplemente poder pintar una gráfica con datos que se reciban.
-            Ha sdo un proyecto complejo, pero a la vez hemos disfrutado muchísimo haciéndolo.
+            Front-end, en ciertos aspectos que no conocíamos y que nos parecen bastante interesantes, como el propio hecho de hacer una conexión o un servidor mediante JS o simplemente poder pintar una gráfica con datos que se reciban. además de como crear apis desde JS y manejar todo a base de este lenguaje y adaptarlo a Typescript en angular.
+            También es de destacar el aprendizaje del lenguaje Arduino, un lenguaje bastante desconocido para nosotros pero que al final hemos podido conocer para realizar el proyecto.
+            Ha sido un proyecto complejo, pero a la vez hemos disfrutado muchísimo haciéndolo.
         </p>
-        <div class="justify-content-center" id="entero">
-            <img src="https://media3.giphy.com/media/mFDWuDppjQJjite6FS/giphy.gif" alt="" >
-        </div>
+        
+            <img src="https://media3.giphy.com/media/mFDWuDppjQJjite6FS/giphy.gif" alt="" style="margin-left: 25%
+            ;">
     </div>
 
 </div>
+</section>
 <br>
 
 <app-footer></app-footer>
