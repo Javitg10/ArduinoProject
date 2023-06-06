@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import * as Plotly from 'plotly.js-dist-min';
 
+
 interface Lectura {
   id: number;
   valor: number;
@@ -118,6 +119,16 @@ export class DatosComponent implements OnInit, OnDestroy {
 
   actualizarGrafico() {
     const yData = this.lecturas.map((lectura) => lectura.valor);
-    Plotly.update(this.chartContainer.nativeElement, { y: [yData] }, {}, [0]);
+    const xData = this.lecturas.map((lectura) => {
+      const fechaCompleta = new Date(lectura.fecha);
+      const hora = fechaCompleta.getUTCHours().toString().padStart(2, '0');
+      const minuto = fechaCompleta.getUTCMinutes().toString().padStart(2, '0');
+      const segundo = fechaCompleta.getUTCSeconds().toString().padStart(2, '0');
+      const milisegundos = fechaCompleta.getUTCMilliseconds().toString().padStart(3, '0');
+      return `${hora}:${minuto}:${segundo}.${milisegundos}`;
+    });
+  
+    Plotly.update(this.chartContainer.nativeElement, { x: [xData], y: [yData] }, {}, [0]);
   }
+  
 }
