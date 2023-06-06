@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { WebSocketSubject } from 'rxjs/webSocket';
-
+import { takeUntil, map } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 interface Lectura {
   id: number;
@@ -14,18 +15,25 @@ interface Lectura {
   templateUrl: './datos.component.html',
   styleUrls: ['./datos.component.css']
 })
-export class DatosComponent {
+export class DatosComponent implements OnInit, OnDestroy {
   lecturas: Lectura[] = [];
-  data: number[] = [];
   mensajeConexion: string = '';
-  private socket$: WebSocketSubject<Lectura>;
+  private socket$!: WebSocketSubject<any>;
+  private destroy$ = new Subject<void>();
 
-  constructor(private http: HttpClient) {
-    this.socket$ = new WebSocketSubject('ws://localhost:3030'); // Establecer conexión WebSocket
-  }
-  
-  conectarArduino(): void {
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
     this.iniciarWebSocket();
+  }
+
+  ngOnDestroy(): void {
+    this.detenerWebSocket();
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  conectarArduino(): void {
     this.http.post('http://localhost:3000/conectar_arduino', {}).subscribe(
       (response: any) => {
         this.mensajeConexion = response.mensaje;
@@ -34,8 +42,8 @@ export class DatosComponent {
         console.error(error);
       }
     );
-    
   }
+
   desconectarArduino(): void {
     this.detenerWebSocket();
     this.http.post('http://localhost:3000/desconectar_arduino', {}).subscribe(
@@ -47,6 +55,7 @@ export class DatosComponent {
       }
     );
   }
+
   obtenerDatos(): void {
     this.http.post('http://localhost:3000/api/datos', {}).subscribe(
       (response: any) => {
@@ -57,22 +66,19 @@ export class DatosComponent {
       }
     );
   }
+
   iniciarWebSocket() {
-    // Escuchar eventos de actualización de datos
-    this.socket$.subscribe(
-      (lectura) => {
-        this.lecturas.push(lectura);
-        console.log(lectura) // Agregar nueva lectura al array
-      },
-      (error) => {
-        console.error('Error en la conexión WebSocket:', error);
-      }
-    );
+    this.socket$ = new WebSocketSubject('ws://localhost:3030');
+    this.socket$
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((lecturas: Lectura[]) => {
+      this.lecturas = lecturas;
+    });
   }
 
   detenerWebSocket() {
     if (this.socket$) {
-      this.socket$.complete(); // Cerrar la conexión WebSocket 
+      this.socket$.complete();
     }
   }
 }

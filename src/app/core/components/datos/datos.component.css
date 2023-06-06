@@ -14,9 +14,10 @@ section .section-title {
     text-transform: uppercase;
 }
 #tabs{
-	background: #00979C;
+	background: #92374D;
     color: black;
 }
+
 #tabs h6.section-title{
     color: black;
 }
