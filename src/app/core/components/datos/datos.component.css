@@ -5,6 +5,7 @@ section {
     border: 8px solid black;
     border-radius: 6px;
     color: black;
+  width: 2000px;;
 }
 
 section .section-title {
@@ -12,10 +13,14 @@ section .section-title {
     color: white;
     margin-bottom: 50px;
     text-transform: uppercase;
+    
 }
 #tabs{
 	background: #92374D;
     color: black;
+    width: 1100px;
+    margin-left: -1%;
+    
 }
 
 #tabs h6.section-title{
@@ -84,5 +89,20 @@ section .section-title {
   .plotly-graph-div .hoverlayer {
     z-index: 1 !important;
   }
+  
+  .button-container {
+    border: 8px solid black;
+    border-radius: 3px;
+    padding: 10px;
+    background-color: #92374D;
+    margin-bottom: 2px;
+  }
+  #divBotones{
+    margin-top: 0%;
+    margin-left: -10%;
+  }
+  
+
+ 
   
   
