@@ -11,6 +11,8 @@ app.use(cors());
 let comPort1;
 let datos = [];
 
+
+
 function conectar_arduino() {
   comPort1 = new SerialPort({
     path: 'COM3',
@@ -74,9 +76,50 @@ function enviarActualizaciones() {
     });
 }
 
+
+app.post('/enviar_datos', (req, res) => {
+  // Configuración de la conexión a la base de datos
+  const connection = mysql.createConnection({
+    host: '127.0.0.1',
+    user: 'root',
+    password: '',
+    database: 'arduino_datos',
+  });
+
+  // Conexión a la base de datos
+  connection.connect((err) => {
+    if (err) {
+      console.error('Error al conectar a la base de datos:', err);
+    } else {
+      console.log('Conexión a la base de datos establecida correctamente');
+      datos.forEach((lectura) => {
+        const fecha = lectura.fecha;
+        const valor = lectura.valor;
+
+        // Insertar los valores en la base de datos
+        const query = 'INSERT INTO lecturas (valor, fecha) VALUES (?, ?)';
+        connection.query(query, [valor, fecha], (error, results) => {
+          if (error) {
+            console.error('Error al insertar los datos:', error);
+            res.status(500).json({ error: 'Error al insertar los datos en la base de datos' });
+          } else {
+            console.log('Datos insertados correctamente:', results);
+          }
+        });
+      });
+      res.json({ mensaje: 'Datos correctamente enviados a la base de datos' });
+    }
+  });
+  
+});
 app.post('/conectar_arduino', (req, res) => {
   conectar_arduino();
   res.json({ mensaje: 'Conexión exitosa con Arduino' });
+});
+app.post('/resetear_arduino', (req, res) => {
+  datos.splice(0, datos.length);
+  conectar_arduino();
+  res.json({ mensaje: 'Conexión reseteada exitosamente con Arduino' });
 });
 
 app.post('/desconectar_arduino', (req, res) => {

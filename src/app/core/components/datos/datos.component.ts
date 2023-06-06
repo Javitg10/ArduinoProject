@@ -39,6 +39,18 @@ export class DatosComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  resetearArduino(): void {
+    this.inicializarGrafico();
+    this.iniciarWebSocket();
+    this.http.post('http://localhost:3000/resetear_arduino', {}).subscribe(
+      (response: any) => {
+        this.mensajeConexion = response.mensaje;
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
   conectarArduino(): void {
     this.inicializarGrafico();
     this.iniciarWebSocket();
@@ -64,8 +76,8 @@ export class DatosComponent implements OnInit, OnDestroy {
     );
   }
 
-  obtenerDatos(): void {
-    this.http.post('http://localhost:3000/api/datos', {}).subscribe(
+  enviarDatos(): void {
+    this.http.post('http://localhost:3000/enviar_datos', {}).subscribe(
       (response: any) => {
         this.mensajeConexion = response.mensaje;
       },
