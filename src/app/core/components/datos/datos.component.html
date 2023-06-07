@@ -15,21 +15,21 @@
     <div class="row">
       <div class="col-md-2" id="divBotones"> <!-- Div con los botones -->
         <div class="button-container">
-          <button class="btn btn-block"(click)="conectarArduino()" style="background-color: #00979C; border: 2px solid black; border-radius: 2px;">
+          <button class="btn btn-block"(click)="conectarArduino()" [disabled]="btnActivo" style="background-color: #00979C; border: 2px solid black; border-radius: 2px;">
             <img src="assets/arduino.png" alt="">
-            <span class="indicator"></span>
+            <span class="indicator" [class.active]="btnActivo"></span>
           </button>
-          <button class="btn  btn-block" (click)="resetearArduino()" style="background-color: orange; border: 2px solid black; border-radius: 2px;">
+          <button class="btn  btn-block" (click)="resetearArduino()" [disabled]="btnActivo" style="background-color: orange; border: 2px solid black; border-radius: 2px;">
             <img src="assets/reseteo.png" alt="">
-            <span class="indicator"></span>
+            <span class="indicator" [class.active]="btnActivo"></span>
           </button>
-          <button class="btn  btn-block" (click)="desconectarArduino()" style="background-color: red; border: 2px solid black; border-radius: 2px;">
+          <button class="btn  btn-block" (click)="desconectarArduino()" [disabled]="!btnActivo" style="background-color: red; border: 2px solid black; border-radius: 2px;">
             <img src="assets/desconectado.png" alt="">
-            <span class="indicator"></span>
+            <span class="indicator" [class.active]="!btnActivo"></span>
           </button>
-          <button class="btn btn-block" (click)="enviarDatos()" style="background-color: green; border: 2px solid black; border-radius: 2px;">
+          <button class="btn btn-block" (click)="enviarDatos()" [disabled]="!btnActivo && !hayDatos" style="background-color: green; border: 2px solid black; border-radius: 2px;">
             <img src="assets/datos.png" alt="">
-            <span class="indicator"></span>
+            <span class="indicator" [class.active]="!btnActivo && !hayDatos"></span>
           </button>
         </div>
       </div>
@@ -81,6 +81,7 @@
                         <td>{{ lectura.id }}</td>
                         <td>{{ lectura.fecha }}</td>
                         <td>{{ lectura.valor }}</td>
+                        <td></td>
                       </tr>
                     </ng-container>
                   </tbody>

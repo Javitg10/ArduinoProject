@@ -101,7 +101,18 @@ section .section-title {
     margin-top: 0%;
     margin-left: -10%;
   }
+  .indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 10px;
+    background-color: gray;
+  }
   
+  .indicator.active {
+    background-color: green;
+  }
 
  
   

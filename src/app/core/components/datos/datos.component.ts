@@ -23,7 +23,10 @@ export class DatosComponent implements OnInit, OnDestroy {
   private socket$!: WebSocketSubject<any>;
   private destroy$ = new Subject<void>();
   private plotlyConfig: any;
-
+  btnActivo: boolean = false;
+  hayDatos: boolean = false;
+  
+  
   @ViewChild('chartContainer') chartContainer!: ElementRef;
 
   
@@ -46,6 +49,8 @@ export class DatosComponent implements OnInit, OnDestroy {
     this.http.post('http://localhost:3000/resetear_arduino', {}).subscribe(
       (response: any) => {
         this.mensajeConexion = response.mensaje;
+        this.btnActivo = true;
+        this.hayDatos = true;
       },
       (error: any) => {
         console.error(error);
@@ -58,6 +63,8 @@ export class DatosComponent implements OnInit, OnDestroy {
     this.http.post('http://localhost:3000/conectar_arduino', {}).subscribe(
       (response: any) => {
         this.mensajeConexion = response.mensaje;
+        this.btnActivo = true;
+        this.hayDatos = true;
       },
       (error: any) => {
         console.error(error);
@@ -70,6 +77,7 @@ export class DatosComponent implements OnInit, OnDestroy {
     this.http.post('http://localhost:3000/desconectar_arduino', {}).subscribe(
       (response: any) => {
         this.mensajeConexion = response.mensaje;
+        this.btnActivo = false;
       },
       (error: any) => {
         console.error(error);
