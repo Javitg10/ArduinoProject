@@ -26,9 +26,6 @@ export class DatosComponent implements OnInit, OnDestroy {
   private plotlyConfig: any;
   btnActivo: boolean = false;
   hayDatos: boolean = false;
-  paginatedLecturas: Lectura[]=[]; // Arreglo de lecturas para mostrar en la página actual
-  pageSize = 15; // Tamaño de página
-  pageIndex = 0;
   
   @ViewChild('chartContainer') chartContainer!: ElementRef;
 
@@ -37,31 +34,12 @@ export class DatosComponent implements OnInit, OnDestroy {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.lecturas = [];
-    this.paginatedLecturas = [];
-    
   }
 
   ngOnDestroy(): void {
     this.detenerWebSocket();
     this.destroy$.next();
     this.destroy$.complete();
-  }
-
-  get totalPages(): number {
-    return Math.ceil(this.lecturas.length / this.pageSize);
-  }
-
-  getPageNumbers(): number[] {
-    return Array(this.totalPages).fill(0).map((x, i) => i);
-  }
-
- 
-  goToPage(page: number) {
-    if (page >= 0 && page < this.totalPages) {
-      this.pageIndex = page;
-      this.paginatedLecturas = this.lecturas.slice(this.pageIndex * this.pageSize, (this.pageIndex + 1) * this.pageSize);
-    }
   }
   resetearArduino(): void {
     this.inicializarGrafico();
@@ -170,6 +148,7 @@ export class DatosComponent implements OnInit, OnDestroy {
     cancelButtonText: 'Cancelar'
   }).then((result) => {
     if (result.isConfirmed) {
+      this.lecturas.splice(0, this.lecturas.length);
       this.http.delete('http://localhost:3000/eliminar_datos', {}).subscribe(
       (response: any) => {
         Swal.fire(

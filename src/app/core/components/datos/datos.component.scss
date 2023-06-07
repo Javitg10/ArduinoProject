@@ -106,18 +106,19 @@ section .section-title {
     padding: 10px;
     background-color: #92374D;
     margin-bottom: 2px;
+    position: relative;
   }
   #divBotones{
     margin-top: 0%;
     margin-left: -10%;
   }
   .indicator {
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
     display: inline-block;
     margin-left: 10px;
-    background-color: gray;
+    background-color: red;
   }
   
   .indicator.active {

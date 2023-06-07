@@ -1,24 +1,38 @@
+<app-header></app-header>
+<br><br>
+
+  <div class="text-center" id="cabecera">
+    <br>
+    <h1 style="font-weight: bolder;">Datos <hr style="height: 5px; color: black; background-color: black; border: none; width:50%; margin-left: 25%;" ></h1>
+
+    <br>
+    <p class="text-start" style="margin-left: 20%; margin-right: 20% ;">En esta parte de nuestra web, podrás medirte en
+      tiempo real tus movimientos musculares, mostrarlos aquí, para poder analizarlos y hasta si lo deseas, mostrarlos
+      mediante una gráfica para verlo mucho más actualizado</p>
+  </div>
+  <br>
 <div class="container">
   <div class="row">
     <div class="col-md-2" id="divBotones">
       <!-- Div con los botones -->
       <div class="button-container">
-        <button class="btn btn-block" (click)="conectarArduino()" style="background-color: #00979C; border: 2px solid black; border-radius: 2px;">
+        <button class="btn btn-block" (click)="conectarArduino()" [disabled]="btnActivo" style="background-color: #00979C; border: 2px solid black; border-radius: 2px;">
           <img src="assets/arduino.png" alt="">
-          <span class="indicator"></span>
+          <span class="indicator"[class.active]="!btnActivo"></span>
         </button>
-        <button class="btn  btn-block" (click)="resetearArduino()" style="background-color: orange; border: 2px solid black; border-radius: 2px;">
+        <button class="btn  btn-block" (click)="resetearArduino()" [disabled]="btnActivo" style="background-color: orange; border: 2px solid black; border-radius: 2px;">
           <img src="assets/reseteo.png" alt="">
-          <span class="indicator"></span>
+          <span class="indicator"[class.active]="!btnActivo"></span>
         </button>
-        <button class="btn  btn-block" (click)="desconectarArduino()" style="background-color: red; border: 2px solid black; border-radius: 2px;">
+        <button class="btn  btn-block" (click)="desconectarArduino()"  [disabled]="!btnActivo"style="background-color: red; border: 2px solid black; border-radius: 2px;">
           <img src="assets/desconectado.png" alt="">
-          <span class="indicator"></span>
+          <span class="indicator"[class.active]="btnActivo"></span>
         </button>
-        <button class="btn btn-block" (click)="enviarDatos()" style="background-color: green; border: 2px solid black; border-radius: 2px;">
+        <button class="btn btn-block" (click)="enviarDatos()" [disabled]="!btnActivo && !hayDatos" style="background-color: green; border: 2px solid black; border-radius: 2px;">
           <img src="assets/datos.png" alt="">
-          <span class="indicator"></span>
+          <span class="indicator"[class.active]="btnActivo || hayDatos"></span>
         </button>
+        
       </div>
     </div>
 
@@ -62,7 +76,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <ng-container *ngFor="let lectura of paginatedLecturas">
+                      <ng-container *ngFor="let lectura of lecturas">
                         <tr>
                           <td>{{ lectura.id }}</td>
                           <td>{{ lectura.fecha }}</td>
@@ -71,25 +85,6 @@
                       </ng-container>
                     </tbody>
                   </table>
-                  <nav aria-label="Page navigation example" class="text-center" style="margin-left: 50%; margin-top: 40px;">
-                    <ul class="pagination">
-                      <li class="page-item" [class.disabled]="pageIndex === 0">
-                        <a class="page-link" href="#" (click)="goToPage(pageIndex - 1)" aria-label="Previous">
-                          <span aria-hidden="true">&laquo;</span>
-                          <span class="sr-only">Previous</span>
-                        </a>
-                      </li>
-                      <li class="page-item" [class.active]="pageIndex === i" *ngFor="let i of getPageNumbers()">
-                        <a class="page-link" href="#" (click)="goToPage(i)">{{ i + 1 }}</a>
-                      </li>
-                      <li class="page-item" [class.disabled]="pageIndex === totalPages - 1">
-                        <a class="page-link" href="#" (click)="goToPage(pageIndex + 1)" aria-label="Next">
-                          <span aria-hidden="true">&raquo;</span>
-                          <span class="sr-only">Next</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </nav>
                 </div>
                 <div class="tab-pane" id="tab3">
                   <div #chartContainer></div>
