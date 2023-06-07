@@ -4,6 +4,7 @@ import { WebSocketSubject } from 'rxjs/webSocket';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import * as Plotly from 'plotly.js-dist-min';
+import Swal from 'sweetalert2';
 
 
 interface Lectura {
@@ -25,7 +26,9 @@ export class DatosComponent implements OnInit, OnDestroy {
   private plotlyConfig: any;
   btnActivo: boolean = false;
   hayDatos: boolean = false;
-  
+  paginatedLecturas: Lectura[]=[]; // Arreglo de lecturas para mostrar en la página actual
+  pageSize = 15; // Tamaño de página
+  pageIndex = 0;
   
   @ViewChild('chartContainer') chartContainer!: ElementRef;
 
@@ -34,6 +37,8 @@ export class DatosComponent implements OnInit, OnDestroy {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
+    this.lecturas = [];
+    this.paginatedLecturas = [];
     
   }
 
@@ -43,6 +48,21 @@ export class DatosComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  get totalPages(): number {
+    return Math.ceil(this.lecturas.length / this.pageSize);
+  }
+
+  getPageNumbers(): number[] {
+    return Array(this.totalPages).fill(0).map((x, i) => i);
+  }
+
+ 
+  goToPage(page: number) {
+    if (page >= 0 && page < this.totalPages) {
+      this.pageIndex = page;
+      this.paginatedLecturas = this.lecturas.slice(this.pageIndex * this.pageSize, (this.pageIndex + 1) * this.pageSize);
+    }
+  }
   resetearArduino(): void {
     this.inicializarGrafico();
     this.iniciarWebSocket();
@@ -138,5 +158,35 @@ export class DatosComponent implements OnInit, OnDestroy {
   
     Plotly.update(this.chartContainer.nativeElement, { x: [xData], y: [yData] }, {}, [0]);
   }
-  
+  confirmarEliminacion() {
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: 'Esta acción eliminará todos los datos de la tabla de lectura. ¿Deseas continuar?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, borrar todo',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.http.delete('http://localhost:3000/eliminar_datos', {}).subscribe(
+      (response: any) => {
+        Swal.fire(
+          'Eliminación exitosa',
+          'Todos los datos de la tabla de lectura han sido eliminados.',
+          'success'
+        );
+      },
+      (error: any) => {
+        Swal.fire(
+          'Error',
+          'Ocurrió un error al intentar eliminar los datos.',
+          'error'
+        );
+      }
+    );}else{
+      console.log("Eliminación anulada.")
+    }
+  });}
 }

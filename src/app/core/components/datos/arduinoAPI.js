@@ -75,6 +75,35 @@ function enviarActualizaciones() {
       }
     });
 }
+app.delete('/eliminar_datos', (req, res)=>{
+  const connection = mysql.createConnection({
+    host: '127.0.0.1',
+    user: 'root',
+    password: '',
+    database: 'arduino_datos',
+  });
+  connection.connect((err) => {
+    if (err) {
+      console.error('Error al conectar a la base de datos:', err);
+    } else {
+     
+    }
+  });
+  console.log('Conexión a la base de datos establecida correctamente');
+
+// Eliminar todos los registros de la tabla "lecturas"
+const query = 'DELETE FROM lecturas';
+connection.query(query, (error, results) => {
+  if (error) {
+    console.error('Error al eliminar los datos:', error);
+    res.status(500).json({ error: 'Error al eliminar los datos de la tabla "lecturas"' });
+  } else {
+    console.log('Todos los registros de la tabla "lecturas" han sido eliminados correctamente');
+    res.json({ mensaje: 'Todos los registros de la tabla "lecturas" han sido eliminados correctamente' });
+  }
+});
+
+});
 
 
 app.post('/enviar_datos', (req, res) => {

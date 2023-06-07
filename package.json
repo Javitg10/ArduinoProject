@@ -41,6 +41,7 @@
     "serialport-js": "^1.1.0",
     "slick-carousel": "^1.8.1",
     "svg.js": "^2.7.1",
+    "sweetalert2": "^11.7.11",
     "tslib": "^2.3.0",
     "ws": "^8.13.0",
     "zone.js": "~0.11.4"
