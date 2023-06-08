@@ -79,6 +79,7 @@ export class DatosComponent implements OnInit, OnDestroy {
       },
       (error: any) => {
         console.error(error);
+        
       }
     );
   }
