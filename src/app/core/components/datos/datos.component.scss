@@ -172,9 +172,12 @@ section .section-title {
   }
 
   .card-title {
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 25px;
+    font-weight: 900;
     margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: center;
+    color: #00979C;
   }
 
   .card-text {
@@ -183,6 +186,12 @@ section .section-title {
   }
 
   .card-img-top {
-    max-height: 100px;
+    max-height: 75px;
     object-fit: contain;
   }
+
+  #containerInfo{
+    background-color: #92374D; 
+    border: 3px solid black;
+  }
+  

@@ -35,6 +35,10 @@
           <img src="assets/datos.png" alt="">
           <span class="indicator"[class.active]="hayDatos"></span>
         </button>
+        <h1>---------</h1>
+        <button class="btn btn-block" style="background-color: white; border: 3px solid black; border-radius: 5px;" (click)="confirmarEliminacion()">
+          <img src="assets/borrar.gif" alt="">
+        </button>
         
       </div>
     </div>
@@ -70,25 +74,25 @@
                     <div class="container">
                       <div class="row">
                         <div class="col-md-6">
-                          <div class="card bg-dark text-white mb-3">
+                          <div class="card text-white mb-3"id="containerInfo">
                             <br>
                             <img src="assets/arduino.png" class="card-img-top" alt="Conectar Arduino">
                             <div class="card-body">
-                              <h5 class="card-title">Conectar Arduino</h5>
-                              <p class="card-text">Inicia la conexión con Arduino.</p>
-                              <p class="card-text">Funcionalidad: Llama a los métodos inicializarGrafico() e iniciarWebSocket(), y luego realiza una solicitud HTTP POST a la URL "http://localhost:3000/conectar_arduino". Cuando recibe una respuesta exitosa, actualiza el mensaje de conexión, habilita el botón y establece la variable hayDatos en verdadero.</p>
+                              <h5 class="card-title">CONECTAR</h5>
+                              <p class="card-text-white">Inicia la conexión con Arduino.</p>
+                              <p class="card-text-white">Funcionalidad: Llama a los métodos inicializarGrafico() e iniciarWebSocket(), y luego realiza una solicitud HTTP POST a la URL "http://localhost:3000/conectar_arduino". Cuando recibe una respuesta exitosa, actualiza el mensaje de conexión, habilita el botón y establece la variable hayDatos en verdadero.</p>
                             </div>
                           </div>
                         </div>
                         <br>
                         <div class="col-md-6">
-                          <div class="card bg-dark text-white mb-3">
+                          <div class="card  text-white mb-3"id="containerInfo">
                             <br>
                             <img src="assets/reseteo.png" class="card-img-top" alt="Resetear Arduino">
                             <div class="card-body">
-                              <h5 class="card-title">Resetear Arduino</h5>
-                              <p class="card-text">Reinicia la conexión con Arduino.</p>
-                              <p class="card-text">Funcionalidad: Llama a los métodos inicializarGrafico() e iniciarWebSocket(), y luego realiza una solicitud HTTP POST a la URL "http://localhost:3000/resetear_arduino". Cuando recibe una respuesta exitosa, actualiza el mensaje de conexión, habilita el botón y establece la variable hayDatos en verdadero.</p>
+                              <h5 class="card-title">LIMPIAR DATOS</h5>
+                              <p class="card-text-white">Reinicia la conexión con Arduino.</p>
+                              <p class="card-text-white">Funcionalidad: Llama a los métodos inicializarGrafico() e iniciarWebSocket(), y luego realiza una solicitud HTTP POST a la URL "http://localhost:3000/resetear_arduino". Cuando recibe una respuesta exitosa, actualiza el mensaje de conexión, habilita el botón y establece la variable hayDatos en verdadero.</p>
                             </div>
                           </div>
                         </div>
@@ -96,24 +100,24 @@
                     <br>
                       <div class="row">
                         <div class="col-md-6">
-                          <div class="card bg-dark text-white mb-3">
+                          <div class="card text-white mb-3"id="containerInfo">
                             <br>
                             <img src="assets/desconectado.png" class="card-img-top" alt="Desconectar Arduino">
                             <div class="card-body">
-                              <h5 class="card-title">Desconectar Arduino</h5>
-                              <p class="card-text">Desconecta Arduino.</p>
-                              <p class="card-text">Funcionalidad: Llama al método detenerWebSocket(), y luego realiza una solicitud HTTP POST a la URL "http://localhost:3000/desconectar_arduino". Cuando recibe una respuesta exitosa, actualiza el mensaje de conexión y deshabilita el botón.</p>
+                              <h5 class="card-title">DESCONECTAR</h5>
+                              <p class="card-text-white">Desconecta Arduino.</p>
+                              <p class="card-text-white">Funcionalidad: Llama al método detenerWebSocket(), y luego realiza una solicitud HTTP POST a la URL "http://localhost:3000/desconectar_arduino". Cuando recibe una respuesta exitosa, actualiza el mensaje de conexión y deshabilita el botón.</p>
                             </div>
                           </div>
                         </div>
                         <div class="col-md-6">
-                          <div class="card bg-dark text-white mb-3">
+                          <div class="card text-white mb-3"id="containerInfo">
                             <br>
                             <img src="assets/datos.png" class="card-img-top" alt="Enviar Datos">
                             <div class="card-body">
-                              <h5 class="card-title">Enviar Datos</h5>
-                              <p class="card-text">Envía datos a Arduino.</p>
-                              <p class="card-text">Funcionalidad: Realiza una solicitud HTTP POST a la URL "http://localhost:3000/enviar_datos". Cuando recibe una respuesta exitosa, actualiza el mensaje de conexión.</p>
+                              <h5 class="card-title">ENVIAR DATOS</h5>
+                              <p class="card-text-white">Envía datos a Arduino.</p>
+                              <p class="card-text-white">Funcionalidad: Realiza una solicitud HTTP POST a la URL "http://localhost:3000/enviar_datos". Cuando recibe una respuesta exitosa, actualiza el mensaje de conexión.</p>
                             </div>
                           </div>
                         </div>
@@ -121,13 +125,13 @@
                     <br>
                       <div class="row " style="margin-left: 25%;">
                         <div class="col-md-12">
-                          <div class="card bg-dark text-white mb-3">
+                          <div class="card text-white mb-3" id="containerInfo">
                             <br>
                             <img src="assets/borrar.gif" class="card-img-top" alt="Confirmar Eliminación">
                             <div class="card-body">
                               <h5 class="card-title">Confirmar Eliminación</h5>
-                              <p class="card-text">Permite al usuario confirmar la eliminación de los datos de la tabla de lectura.</p>
-                              <p class="card-text">Funcionalidad: Muestra un cuadro de diálogo de confirmación utilizando la biblioteca SweetAlert. Si el usuario confirma la eliminación, borra todos los elementos del arreglo lecturas y realiza una solicitud HTTP DELETE a la URL "http://localhost:3000/eliminar_datos". Si la solicitud es exitosa, muestra un mensaje de eliminación exitosa. En caso de error, muestra un mensaje de error.</p>
+                              <p class="card-text-white">Permite al usuario confirmar la eliminación de los datos de la tabla de lectura.</p>
+                              <p class="card-text-white">Funcionalidad: Muestra un cuadro de diálogo de confirmación utilizando la biblioteca SweetAlert. Si el usuario confirma la eliminación, borra todos los elementos del arreglo lecturas y realiza una solicitud HTTP DELETE a la URL "http://localhost:3000/eliminar_datos". Si la solicitud es exitosa, muestra un mensaje de eliminación exitosa. En caso de error, muestra un mensaje de error.</p>
                             </div>
                           </div>
                         </div>
@@ -171,9 +175,7 @@
     </div>
   </div>
   <br>
-  <button class="btn" style="background-color: white; border: 3px solid black; border-radius: 5px; margin-left: -8%;" (click)="confirmarEliminacion()">
-    <img src="assets/borrar.gif" alt="">
-  </button>
+  
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
