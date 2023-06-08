@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { WebSocketSubject } from 'rxjs/webSocket';
 import { takeUntil } from 'rxjs/operators';
@@ -18,13 +18,13 @@ interface Lectura {
   templateUrl: './datos.component.html',
   styleUrls: ['./datos.component.scss']
 })
-export class DatosComponent implements OnInit, OnDestroy {
+export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
   lecturas: Lectura[] = [];
   mensajeConexion: string = '';
   private socket$!: WebSocketSubject<any>;
   private destroy$ = new Subject<void>();
   private plotlyConfig: any;
-  btnActivo: boolean = false;
+  ArduinoON: boolean = false;
   hayDatos: boolean = false;
   
   @ViewChild('chartContainer') chartContainer!: ElementRef;
@@ -32,8 +32,31 @@ export class DatosComponent implements OnInit, OnDestroy {
   
 
   constructor(private http: HttpClient) {}
-
+  ngAfterViewInit(): void {
+    this.inicializarGrafico();
+    this.actualizarGrafico();
+  }
   ngOnInit(): void {
+    
+    this.iniciarWebSocket();
+    // Restaurar estado desde el almacenamiento local
+    const storedLecturas = localStorage.getItem('lecturas');
+    if (storedLecturas) {
+      this.lecturas = JSON.parse(storedLecturas);
+    }
+
+    const storedBtnActivo = localStorage.getItem('btnActivo');
+    if (storedBtnActivo) {
+      this.ArduinoON = JSON.parse(storedBtnActivo);
+    }
+
+    const storedHayDatos = localStorage.getItem('hayDatos');
+    if (storedHayDatos) {
+      this.hayDatos = JSON.parse(storedHayDatos);
+    }
+
+    
+
   }
 
   ngOnDestroy(): void {
@@ -42,13 +65,15 @@ export class DatosComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
   resetearArduino(): void {
-    this.inicializarGrafico();
     this.iniciarWebSocket();
-    this.http.post('http://localhost:3000/resetear_arduino', {}).subscribe(
+    this.http.post('http://localhost:3000/borrar_datos_actual', {}).subscribe(
       (response: any) => {
         this.mensajeConexion = response.mensaje;
-        this.btnActivo = true;
-        this.hayDatos = true;
+        this.hayDatos = false;
+        this.lecturas.splice(0, this.lecturas.length);
+        this.actualizarGrafico();
+        this.guardarEstadoLocalStorage();
+        
       },
       (error: any) => {
         console.error(error);
@@ -56,13 +81,12 @@ export class DatosComponent implements OnInit, OnDestroy {
     );
   }
   conectarArduino(): void {
-    this.inicializarGrafico();
     this.iniciarWebSocket();
     this.http.post('http://localhost:3000/conectar_arduino', {}).subscribe(
       (response: any) => {
         this.mensajeConexion = response.mensaje;
-        this.btnActivo = true;
-        this.hayDatos = true;
+        this.ArduinoON = true;
+        this.guardarEstadoLocalStorage();
       },
       (error: any) => {
         console.error(error);
@@ -75,7 +99,8 @@ export class DatosComponent implements OnInit, OnDestroy {
     this.http.post('http://localhost:3000/desconectar_arduino', {}).subscribe(
       (response: any) => {
         this.mensajeConexion = response.mensaje;
-        this.btnActivo = false;
+        this.ArduinoON = false;
+        this.guardarEstadoLocalStorage();
       },
       (error: any) => {
         console.error(error);
@@ -101,7 +126,9 @@ export class DatosComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((lecturas: Lectura[]) => {
         this.lecturas = lecturas;
+        this.hayDatos = true;
         this.actualizarGrafico();
+        this.guardarEstadoLocalStorage();
       });
   }
 
@@ -169,4 +196,12 @@ export class DatosComponent implements OnInit, OnDestroy {
       console.log("Eliminación anulada.")
     }
   });}
+
+  guardarEstadoLocalStorage() {
+    // Guardar las variables en el almacenamiento local
+    localStorage.setItem('lecturas', JSON.stringify(this.lecturas));
+    localStorage.setItem('btnActivo', JSON.stringify(this.ArduinoON));
+    localStorage.setItem('hayDatos', JSON.stringify(this.hayDatos));
+  }
+
 }
