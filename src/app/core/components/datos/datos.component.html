@@ -16,21 +16,21 @@
     <div class="col-md-2" id="divBotones">
       <!-- Div con los botones -->
       <div class="button-container">
-        <button class="btn btn-block" (click)="conectarArduino()" [disabled]="btnActivo" style="background-color: #00979C; border: 2px solid black; border-radius: 2px;">
+        <button class="btn btn-block" (click)="conectarArduino()" [disabled]="ArduinoON" style="background-color: #00979C; border: 2px solid black; border-radius: 2px;">
           <img src="assets/arduino.png" alt="">
-          <span class="indicator"[class.active]="!btnActivo"></span>
+          <span class="indicator"[class.active]="!ArduinoON"></span>
         </button>
-        <button class="btn  btn-block" (click)="resetearArduino()" [disabled]="btnActivo" style="background-color: orange; border: 2px solid black; border-radius: 2px;">
-          <img src="assets/reseteo.png" alt="">
-          <span class="indicator"[class.active]="!btnActivo"></span>
+        <button class="btn  btn-block" (click)="resetearArduino()" [disabled]="!hayDatos" style="background-color: orange; border: 2px solid black; border-radius: 2px;">
+          <img src="assets/escoba.png" alt="">
+          <span class="indicator"[class.active]="hayDatos"></span>
         </button>
-        <button class="btn  btn-block" (click)="desconectarArduino()"  [disabled]="!btnActivo"style="background-color: red; border: 2px solid black; border-radius: 2px;">
+        <button class="btn  btn-block" (click)="desconectarArduino()"  [disabled]="!ArduinoON"style="background-color: red; border: 2px solid black; border-radius: 2px;">
           <img src="assets/desconectado.png" alt="">
-          <span class="indicator"[class.active]="btnActivo"></span>
+          <span class="indicator"[class.active]="ArduinoON"></span>
         </button>
-        <button class="btn btn-block" (click)="enviarDatos()" [disabled]="!btnActivo && !hayDatos" style="background-color: green; border: 2px solid black; border-radius: 2px;">
+        <button class="btn btn-block" (click)="enviarDatos()" [disabled]="!hayDatos" style="background-color: green; border: 2px solid black; border-radius: 2px;">
           <img src="assets/datos.png" alt="">
-          <span class="indicator"[class.active]="btnActivo || hayDatos"></span>
+          <span class="indicator"[class.active]="hayDatos"></span>
         </button>
         
       </div>

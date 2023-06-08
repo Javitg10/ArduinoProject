@@ -145,10 +145,9 @@ app.post('/conectar_arduino', (req, res) => {
   conectar_arduino();
   res.json({ mensaje: 'Conexión exitosa con Arduino' });
 });
-app.post('/resetear_arduino', (req, res) => {
+app.post('/borrar_datos_actual', (req, res) => {
   datos.splice(0, datos.length);
-  conectar_arduino();
-  res.json({ mensaje: 'Conexión reseteada exitosamente con Arduino' });
+  res.json({ mensaje: 'Los datos han sido borrados exitosamente' });
 });
 
 app.post('/desconectar_arduino', (req, res) => {
