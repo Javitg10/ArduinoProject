@@ -19,9 +19,13 @@
     <div class="col-md-2" id="divBotones">
       <!-- Div con los botones -->
       <div class="button-container">
-        <button class="btn btn-block" (click)="conectarArduino()" [disabled]="ArduinoON" style="background-color: #00979C; border: 2px solid black; border-radius: 2px;">
+        <button class="btn btn-block" (click)="construirArduino()" [disabled]="ArduinoON" style="background-color: #00979C; border: 2px solid black; border-radius: 2px;">
           <img src="assets/arduino.png" alt="">
           <span class="indicator"[class.active]="!ArduinoON"></span>
+        </button>
+        <button class="btn btn-block" (click)="reconectarArduino()" [disabled]="!stopConn" style="background-color: #00979C; border: 2px solid black; border-radius: 2px;">
+          <img src="assets/reseteo.png" alt="">
+          <span class="indicator"[class.active]="stopConn"></span>
         </button>
         <button class="btn  btn-block" (click)="resetearArduino()" [disabled]="!hayDatos" style="background-color: orange; border: 2px solid black; border-radius: 2px;">
           <img src="assets/escoba.png" alt="">
@@ -88,7 +92,7 @@
                         <div class="col-md-6">
                           <div class="card  text-white mb-3"id="containerInfo">
                             <br>
-                            <img src="assets/reseteo.png" class="card-img-top" alt="Resetear Arduino">
+                            <img src="assets/escoba.png" class="card-img-top" alt="Resetear Arduino">
                             <div class="card-body">
                               <h5 class="card-title">LIMPIAR DATOS</h5>
                               <p class="card-text-white">Reinicia la conexión con Arduino.</p>

@@ -26,6 +26,8 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
   private plotlyConfig: any;
   ArduinoON: boolean = false;
   hayDatos: boolean = false;
+  stopConn: boolean = false;
+  comParams: any;
   
   @ViewChild('chartContainer') chartContainer!: ElementRef;
 
@@ -55,6 +57,10 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
       this.hayDatos = JSON.parse(storedHayDatos);
     }
 
+    const storedStopConn = localStorage.getItem('stopConn');
+    if (storedStopConn) {
+      this.stopConn = JSON.parse(storedStopConn);
+    }
     
 
   }
@@ -80,19 +86,6 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
       }
     );
   }
-  conectarArduino(): void {
-    this.iniciarWebSocket();
-    this.http.post('http://localhost:3000/conectar_arduino', {}).subscribe(
-      (response: any) => {
-        this.mensajeConexion = response.mensaje;
-        this.ArduinoON = true;
-        this.guardarEstadoLocalStorage();
-      },
-      (error: any) => {
-        console.error(error);
-      }
-    );
-  }
 
   desconectarArduino(): void {
     this.detenerWebSocket();
@@ -100,6 +93,22 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
       (response: any) => {
         this.mensajeConexion = response.mensaje;
         this.ArduinoON = false;
+        this.stopConn = true;
+        this.guardarEstadoLocalStorage();
+      },
+      (error: any) => {
+        console.error(error);
+        
+      }
+    );
+  }
+  reconectarArduino(): void {
+    this.detenerWebSocket();
+    this.http.post('http://localhost:3000/conectar_arduino', this.comParams).subscribe(
+      (response: any) => {
+        this.mensajeConexion = response.mensaje;
+        this.ArduinoON = true;
+        this.stopConn = false;
         this.guardarEstadoLocalStorage();
       },
       (error: any) => {
@@ -202,6 +211,48 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
     localStorage.setItem('lecturas', JSON.stringify(this.lecturas));
     localStorage.setItem('btnActivo', JSON.stringify(this.ArduinoON));
     localStorage.setItem('hayDatos', JSON.stringify(this.hayDatos));
+    localStorage.setItem('stopConn', JSON.stringify(this.stopConn));
   }
 
+
+  construirArduino(): void{
+    Swal.fire({
+      title: 'Conectar con Arduino',
+      html: `
+        <input id="pathInput" class="swal2-input" placeholder="Ruta (ej: COM3)">
+        <input id="baudRateInput" class="swal2-input" placeholder="Baud Rate (ej: 9600)">
+        <input id="dataBitsInput" class="swal2-input" placeholder="Data Bits (ej: 8)">
+        <input id="stopBitsInput" class="swal2-input" placeholder="Stop Bits (ej: 1)">
+        <input id="parityInput" class="swal2-input" placeholder="Parity (ej: none)">
+      `,
+      showCancelButton: true,
+      confirmButtonText: 'Conectar',
+      cancelButtonText: 'Cancelar',
+      preConfirm: () => {
+        return {
+          path: (<HTMLInputElement>document.getElementById('pathInput')).value,
+          baudRate: parseInt((<HTMLInputElement>document.getElementById('baudRateInput')).value),
+          dataBits: parseInt((<HTMLInputElement>document.getElementById('dataBitsInput')).value),
+          stopBits: parseInt((<HTMLInputElement>document.getElementById('stopBitsInput')).value),
+          parity: (<HTMLInputElement>document.getElementById('parityInput')).value,
+        };
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.comParams = result.value;
+        this.iniciarWebSocket();
+        this.http.post('http://localhost:3000/conectar_arduino', this.comParams).subscribe(
+          (response: any) => {
+            this.mensajeConexion = response.mensaje;
+            this.ArduinoON = true;
+            this.guardarEstadoLocalStorage();
+          },
+          (error: any) => {
+            console.error(error);
+          }
+        );
+      }
+    });
+  }
 }
