@@ -23,11 +23,11 @@
           <img src="assets/arduino.png" alt="">
           <span class="indicator"[class.active]="!ArduinoON"></span>
         </button>
-        <button class="btn btn-block" (click)="reconectarArduino()" [disabled]="!stopConn" style="background-color: #00979C; border: 2px solid black; border-radius: 2px;">
+        <button class="btn btn-block" (click)="reconectarArduino()" [disabled]="!stopConn" style="background-color: #00FFFF; border: 2px solid black; border-radius: 2px;">
           <img src="assets/reseteo.png" alt="">
           <span class="indicator"[class.active]="stopConn"></span>
         </button>
-        <button class="btn  btn-block" (click)="resetearArduino()" [disabled]="!hayDatos" style="background-color: orange; border: 2px solid black; border-radius: 2px;">
+        <button class="btn  btn-block" (click)="resetearArduino()" [disabled]="!hayDatos" style="background-color: #00FFFF; border: 2px solid black; border-radius: 2px;">
           <img src="assets/escoba.png" alt="">
           <span class="indicator"[class.active]="hayDatos"></span>
         </button>
