@@ -17,26 +17,27 @@
 <div class="container">
   <div class="row">
     <div class="col-md-2" id="divBotones">
-      <!-- Div con los botones -->
       <div class="button-container">
-        <button class="btn btn-block" (click)="conectarArduino()" [disabled]="ArduinoON" style="background-color: #00979C; border: 2px solid black; border-radius: 2px;">
+        <h6 style="color: #EEEBD3; font-weight: bolder;">-Control Arduino-</h6>
+        <button class="btn btn-block" (click)="conectarArduino()" [disabled]="ArduinoON" style="background-color: #00FFFF; border: 2px solid black; border-radius: 2px;">
           <img src="assets/arduino.png" alt="">
           <span class="indicator"[class.active]="!ArduinoON"></span>
         </button>
-        <button class="btn  btn-block" (click)="resetearArduino()" [disabled]="!hayDatos" style="background-color: orange; border: 2px solid black; border-radius: 2px;">
+        <button class="btn  btn-block" (click)="resetearArduino()" [disabled]="!hayDatos" style="background-color: #00FFFF; border: 2px solid black; border-radius: 2px;">
           <img src="assets/escoba.png" alt="">
           <span class="indicator"[class.active]="hayDatos"></span>
         </button>
-        <button class="btn  btn-block" (click)="desconectarArduino()"  [disabled]="!ArduinoON"style="background-color: red; border: 2px solid black; border-radius: 2px;">
+        <button class="btn  btn-block" (click)="desconectarArduino()"  [disabled]="!ArduinoON"style="background-color: #00FFFF; border: 2px solid black; border-radius: 2px;">
           <img src="assets/desconectado.png" alt="">
           <span class="indicator"[class.active]="ArduinoON"></span>
         </button>
-        <button class="btn btn-block" (click)="enviarDatos()" [disabled]="!hayDatos" style="background-color: green; border: 2px solid black; border-radius: 2px;">
+        <button class="btn btn-block" (click)="enviarDatos()" [disabled]="!hayDatos" style="background-color: #00FFFF; border: 2px solid black; border-radius: 2px;">
           <img src="assets/datos.png" alt="">
           <span class="indicator"[class.active]="hayDatos"></span>
         </button>
-        <h1>---------</h1>
-        <button class="btn btn-block" style="background-color: white; border: 3px solid black; border-radius: 5px;" (click)="confirmarEliminacion()">
+        <br>
+        <h6 style="color: #EEEBD3; font-weight: bolder;">---Control BBDD---</h6>
+        <button class="btn btn-block" style="background-color:#00FFFF; border: 3px solid black; border-radius: 5px;" (click)="confirmarEliminacion()">
           <img src="assets/borrar.gif" alt="">
         </button>
         
@@ -74,7 +75,7 @@
                     <div class="container">
                       <div class="row">
                         <div class="col-md-6">
-                          <div class="card text-white mb-3"id="containerInfo">
+                          <div class="card text-#EEEBD3 mb-3"id="containerInfo">
                             <br>
                             <img src="assets/arduino.png" class="card-img-top" alt="Conectar Arduino">
                             <div class="card-body">
@@ -86,9 +87,9 @@
                         </div>
                         <br>
                         <div class="col-md-6">
-                          <div class="card  text-white mb-3"id="containerInfo">
+                          <div class="card text-#EEEBD3 mb-3"id="containerInfo">
                             <br>
-                            <img src="assets/reseteo.png" class="card-img-top" alt="Resetear Arduino">
+                            <img src="assets/escoba.png" class="card-img-top" alt="Resetear Arduino">
                             <div class="card-body">
                               <h5 class="card-title">LIMPIAR DATOS</h5>
                               <p class="card-text-white">Reinicia la conexión con Arduino.</p>
@@ -100,7 +101,7 @@
                     <br>
                       <div class="row">
                         <div class="col-md-6">
-                          <div class="card text-white mb-3"id="containerInfo">
+                          <div class="card text-#EEEBD3 mb-3"id="containerInfo">
                             <br>
                             <img src="assets/desconectado.png" class="card-img-top" alt="Desconectar Arduino">
                             <div class="card-body">
@@ -111,7 +112,7 @@
                           </div>
                         </div>
                         <div class="col-md-6">
-                          <div class="card text-white mb-3"id="containerInfo">
+                          <div class="card text-#EEEBD3 mb-3"id="containerInfo">
                             <br>
                             <img src="assets/datos.png" class="card-img-top" alt="Enviar Datos">
                             <div class="card-body">
@@ -125,7 +126,7 @@
                     <br>
                       <div class="row " style="margin-left: 25%;">
                         <div class="col-md-12">
-                          <div class="card text-white mb-3" id="containerInfo">
+                          <div class="card text-#EEEBD3 mb-3" id="containerInfo">
                             <br>
                             <img src="assets/borrar.gif" class="card-img-top" alt="Confirmar Eliminación">
                             <div class="card-body">
@@ -165,7 +166,10 @@
                   </table>
                 </div>
                 <div class="tab-pane" id="tab3">
-                  <div #chartContainer></div>
+                  <h1 class="text-center">Gráfica</h1>
+                  <p class="text-center">En este apartado, como puedes comprobar tendrás la gráfica, actualizada en tiempo real con los datos que te llegan por la placa de arduino</p>
+                  
+                  <div style="width: 100%; margin-left: 18%;" #chartContainer></div>
                 </div>
               </div>
             </div>

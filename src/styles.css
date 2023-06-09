@@ -1,8 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display');
+
 body{
     background-color: #003554;
     overflow: hidden;
     position: relative;
+    font-family: 'Playfair Display', serif;
 } 
   .scrollable-content {
     overflow: auto;
