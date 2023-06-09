@@ -170,5 +170,41 @@ wss.on('connection', (ws) => {
     // Recibir mensajes del cliente (si es necesario)
   });
 });
+app.post('/consultar_datos', (req, res) => {
+  // Obtener los parámetros de búsqueda del cuerpo de la solicitud
+  const { dni, fecha } = req.body;
+
+  // Conexión a la base de datos
+  connection.connect((err) => {
+    if (err) {
+      console.error('Error al conectar a la base de datos:', err);
+      res.status(500).json({ error: 'Error al conectar a la base de datos' });
+    } else {
+      console.log('Conexión a la base de datos establecida correctamente');
+
+      // Construir la consulta SQL con los parámetros de búsqueda
+      let query = 'SELECT * FROM lecturas';
+
+      if (dni && fecha) {
+        query += ` WHERE dni = '${dni}' AND fecha = '${fecha}'`;
+      } else if (dni) {
+        query += ` WHERE dni = '${dni}'`;
+      } else if (fecha) {
+        query += ` WHERE fecha = '${fecha}'`;
+      }
+
+      // Ejecutar la consulta en la base de datos
+      connection.query(query, (error, results) => {
+        if (error) {
+          console.error('Error al consultar los datos:', error);
+          res.status(500).json({ error: 'Error al consultar los datos' });
+        } else {
+          console.log('Datos consultados correctamente:', results);
+          res.json(results);
+        }
+      });
+    }
+  });
+});
 
 

@@ -30,6 +30,8 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
   hayDatos: boolean = false;
   stopConn: boolean = false;
   comParams: any;
+  filtroFecha!:string;
+  filtroDni!:string;
   
   @ViewChild('chartContainer') chartContainer!: ElementRef;
 
@@ -281,4 +283,38 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
       document.body.removeChild(link);
     }
   }
+
+  Filtro() {
+    Swal.fire({
+      title: 'Filtro por DNI y Fecha',
+      html:
+        '<input id="fecha" class="swal2-input" placeholder="Fecha" type="date">' +
+        '<input id="dni" class="swal2-input" placeholder="DNI" type="text">',
+      showCancelButton: true,
+      confirmButtonText: 'Buscar',
+      preConfirm: () => {
+        this.filtroFecha = (document.getElementById('fecha') as HTMLInputElement).value;
+        this.filtroDni = (document.getElementById('dni') as HTMLInputElement).value;
+  
+        this.realizarConsulta();
+      }
+    });
+  }
+  realizarConsulta() {
+    const fecha = this.filtroFecha;
+    const dni = this.filtroDni;
+  
+    // Realiza la consulta utilizando los valores de fecha y dni
+  
+    // Ejemplo de consulta utilizando HttpClient
+    this.http.get('http://localhost:3000/consulta', { params: { fecha, dni } }).subscribe(
+      (response: any) => {
+        // Procesa la respuesta de la consulta
+        console.log(response);
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+}
 }
