@@ -20,33 +20,37 @@
       <div class="button-container">
         <h6 style="color: #EEEBD3; font-weight: bolder;">-Control Arduino-</h6>
         <button class="btn btn-block" (click)="construirArduino()" [disabled]="ArduinoON" style="background-color: #00FFFF; border: 2px solid black; border-radius: 2px;">
-          <img src="assets/arduino.png" alt="">
+          <img src="assets/arduino.png" alt="" style="height: 50px; width: 50px;">
           <span class="indicator"[class.active]="!ArduinoON"></span>
         </button>
         <button class="btn btn-block" (click)="reconectarArduino()" [disabled]="!stopConn" style="background-color: #00FFFF; border: 2px solid black; border-radius: 2px;">
-          <img src="assets/reseteo.png" alt="">
+          <img src="assets/reseteo.png" alt="" style="height: 50px; width: 50px;">
           <span class="indicator"[class.active]="stopConn"></span>
         </button>
         <button class="btn  btn-block" (click)="resetearArduino()" [disabled]="!hayDatos" style="background-color: #00FFFF; border: 2px solid black; border-radius: 2px;">
-          <img src="assets/escoba.png" alt="">
+          <img src="assets/escoba.png" alt="" style="height: 50px; width: 50px;">
           <span class="indicator"[class.active]="hayDatos"></span>
         </button>
         <button class="btn  btn-block" (click)="desconectarArduino()"  [disabled]="!ArduinoON"style="background-color: #00FFFF; border: 2px solid black; border-radius: 2px;">
-          <img src="assets/desconectado.png" alt="">
+          <img src="assets/desconectado.png" alt="" style="height: 50px; width: 50px;">
           <span class="indicator"[class.active]="ArduinoON"></span>
         </button>
         <button class="btn btn-block" (click)="enviarDatos()" [disabled]="!hayDatos" style="background-color: #00FFFF; border: 2px solid black; border-radius: 2px;">
-          <img src="assets/datos.png" alt="">
+          <img src="assets/datos.png" alt="" style="height: 50px; width: 50px;">
           <span class="indicator"[class.active]="hayDatos"></span>
+        </button>
+        <button class="btn btn-block" style="background-color:#00FFFF; border: 3px solid black; border-radius: 5px;" (click)="generarCSV()">
+          <img src="assets/documento.gif" alt="" style="height: 50px; width: 50px;">
         </button>
         <br>
         <h6 style="color: #EEEBD3; font-weight: bolder;">---Control BBDD---</h6>
         <button class="btn btn-block" style="background-color:#00FFFF; border: 3px solid black; border-radius: 5px;" (click)="confirmarEliminacion()">
-          <img src="assets/borrar.gif" alt="">
+          <img src="assets/borrar.gif" alt="" style="height: 50px; width: 50px;">
         </button>
-        <button class="btn btn-block" style="background-color:#00FFFF; border: 3px solid black; border-radius: 5px;" (click)="generarCSV()">
-          <img src="assets/pngegg.png" alt="">
+        <button class="btn btn-block" style="background-color:#00FFFF; border: 3px solid black; border-radius: 5px;" (click)="Filtro()">
+          <img src="assets/filtro.png" alt="" style="height: 50px; width: 50px;">
         </button>
+        
         
       </div>
     </div>
