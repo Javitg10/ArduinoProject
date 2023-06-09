@@ -135,8 +135,8 @@
                         </div>
                       </div>
                     <br>
-                      <div class="row " style="margin-left: 25%;">
-                        <div class="col-md-12">
+                      <div class="row ">
+                        <div class="col-md-6">
                           <div class="card text-#EEEBD3 mb-3" id="containerInfo">
                             <br>
                             <img src="assets/borrar.gif" class="card-img-top" alt="Confirmar Eliminación">
@@ -144,6 +144,32 @@
                               <h5 class="card-title">Confirmar Eliminación</h5>
                               <p class="card-text-white">Permite al usuario confirmar la eliminación de los datos de la tabla de lectura.</p>
                               <p class="card-text-white">Funcionalidad: Muestra un cuadro de diálogo de confirmación utilizando la biblioteca SweetAlert. Si el usuario confirma la eliminación, borra todos los elementos del arreglo lecturas y realiza una solicitud HTTP DELETE a la URL "http://localhost:3000/eliminar_datos". Si la solicitud es exitosa, muestra un mensaje de eliminación exitosa. En caso de error, muestra un mensaje de error.</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="card text-#EEEBD3 mb-3" id="containerInfo">
+                            <br>
+                            <img src="assets/documento.gif" class="card-img-top" alt="Confirmar Eliminación">
+                            <div class="card-body">
+                              <h5 class="card-title">Generar Archivo CSV</h5>
+                              <p class="card-text-white">Permite al usuario, una vez generados todos los valores importar a su propio dispositivo un archivo CSV que podrá ser abierto desde cualquier editor de hojas de calculo que se imagine.</p>
+                              <p class="card-text-white">Funcionalidad: Este botón llama al metodo, este es generarCSV() convierte el arreglo lecturas en un archivo CSV y lo descarga en el navegador del usuario. Simplificando aún más:
+                                Este método convierte y descarga el arreglo lecturas como un archivo CSV.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="row " style="margin-left: 25%;">
+                        <div class="col-md-12">
+                          <div class="card text-#EEEBD3 mb-3" id="containerInfo">
+                            <br>
+                            <img src="assets/filtro.png" class="card-img-top" alt="Confirmar Eliminación">
+                            <div class="card-body">
+                              <h5 class="card-title">Filtro de datos</h5>
+                              <p class="card-text-white">Permite al usuario filtrar datos, dependiendo de lo quedesee funcionará en funcion del DNI o la fecha de las diferentes mediciones que se hagan, las cuales estarán registradas en la Base de Datos</p>
+                              <p class="card-text-white">Funcionalidad: Muestra un cuadro de diálogo donde el usuario podrá rellenar los diferentes campos para realizar la búsqueda, esto después será mostrado por pantalla.</p>
                             </div>
                           </div>
                         </div>
@@ -180,7 +206,7 @@
                   <h1 class="text-center">Gráfica</h1>
                   <p class="text-center">En este apartado, como puedes comprobar tendrás la gráfica, actualizada en tiempo real con los datos que te llegan por la placa de arduino</p>
                   
-                  <div style="width: 100%; margin-left: 18%;" #chartContainer></div>
+                  <div style="width: 100%; margin-left: 18%;" class="" #chartContainer></div>
                 </div>
               </div>
             </div>

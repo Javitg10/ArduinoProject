@@ -157,7 +157,28 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
 
   inicializarGrafico() {
     this.plotlyConfig = {
-      responsive: true
+      responsive: true,
+      plot_bgcolor: '#92374D',
+    paper_bgcolor: '#92374D',
+    line: { color: '#EEEBD3' },
+    marker: { color: '#EEEBD3' },
+    xaxis: {
+      color: '#EEEBD3',
+      tickfont: {
+        color: '#EEEBD3'
+      },
+      linewidth: 2, 
+      tickwidth: 2 
+    },
+    yaxis: {
+      color: '#EEEBD3',
+      tickfont: {
+        color: '#EEEBD3'
+      },
+      linewidth: 2,
+      tickwidth: 2 
+    }
+
     };
 
     Plotly.newPlot(
@@ -166,6 +187,8 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
       { margin: { t: 0 } },
       this.plotlyConfig
     );
+    const chartContainerElement = this.chartContainer.nativeElement;
+    chartContainerElement.classList.add('custom-chart-style');
   }
 
   actualizarGrafico() {
@@ -178,8 +201,15 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
       const milisegundos = fechaCompleta.getUTCMilliseconds().toString().padStart(3, '0');
       return `${hora}:${minuto}:${segundo}.${milisegundos}`;
     });
+    const update = {
+      'line.color': '#EEEBD3',
+      'marker.color': '#EEEBD3',
+      'plot_bgcolor': '#00979C',
+      'paper_bgcolor': '#00979C',
+      'line.width': 2
+    };
   
-    Plotly.update(this.chartContainer.nativeElement, { x: [xData], y: [yData] }, {}, [0]);
+    Plotly.update(this.chartContainer.nativeElement, { x: [xData], y: [yData] }, update, [0]);
   }
 
   confirmarEliminacion() {

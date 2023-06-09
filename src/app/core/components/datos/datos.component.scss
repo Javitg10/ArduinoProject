@@ -194,4 +194,10 @@ section .section-title {
     background-color: #003554; 
     border: 3px solid black;
   }
+ 
+  .custom-chart-style .plotly svg g g g line,
+  .custom-chart-style .plotly svg g g g text {
+    stroke-width: 2px; /* Ancho de las líneas de los ejes y los números de los ejes */
+  }
+
   
