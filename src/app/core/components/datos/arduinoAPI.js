@@ -6,66 +6,16 @@ const app = express();
 const puerto = 3000;
 const WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: 3030 });
+const bodyParser = require('body-parser');
+
+
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 let comPort1;
 let datos = [];
 
-
-
-function conectar_arduino() {
-  comPort1 = new SerialPort({
-    path: 'COM3',
-    baudRate: 9600,
-    dataBits: 8,
-    stopBits: 1,
-    parity: 'none',
-  });
-
-  comPort1.on('open', function () {
-    console.log('Conexión establecida correctamente');
-  });
-
-  comPort1.on('error', function (err) {
-    console.error('Error al conectar: ', err.message);
-  });
-
-  comPort1.on('data', function (data) {
-    // Convertir el buffer recibido a un string
-    let str = data.toString();
-
-    // Parsear el valor del pin analógico
-    let valor = parseInt(str);
-
-    if (!isNaN(valor)) {
-      // Mostrar el valor leído en la consola
-      console.log('Valor leído: ' + valor);
-
-      // Obtener la fecha y hora actual con milisegundos
-      const fechaHoraActual = new Date();
-      const fechaHora = fechaHoraActual.toISOString().slice(0, 23).replace('T', ' ');
-
-      const lectura = {
-        id: datos.length + 1,
-        valor: valor,
-        fecha: fechaHora,
-      };
-
-      datos.push(lectura);
-      enviarActualizaciones();
-    }
-  });
-}
-
-function desconectar_arduino() {
-  comPort1.close((err) => {
-    if (err) {
-      console.error('Error al cerrar la conexión:', err);
-    } else {
-      console.log('Conexión cerrada correctamente');
-    }
-  });
-}
 
 function enviarActualizaciones() {
     wss.clients.forEach((client) => {
@@ -142,7 +92,50 @@ app.post('/enviar_datos', (req, res) => {
   
 });
 app.post('/conectar_arduino', (req, res) => {
-  conectar_arduino();
+  const comParams = req.body; // Obtener los parámetros enviados desde el cliente
+
+  // Realizar la configuración de la conexión con Arduino utilizando los parámetros recibidos
+  comPort1 = new SerialPort({
+    path: comParams.path,
+    baudRate: comParams.baudRate,
+    dataBits: comParams.dataBits,
+    stopBits: comParams.stopBits,
+    parity: comParams.parity,
+  });
+
+  comPort1.on('open', function () {
+    console.log('Conexión establecida correctamente');
+  });
+
+  comPort1.on('error', function (err) {
+    console.error('Error al conectar: ', err.message);
+  });
+
+  comPort1.on('data', function (data) {
+    // Convertir el buffer recibido a un string
+    let str = data.toString();
+
+    // Parsear el valor del pin analógico
+    let valor = parseInt(str);
+
+    if (!isNaN(valor)) {
+      // Mostrar el valor leído en la consola
+      console.log('Valor leído: ' + valor);
+
+      // Obtener la fecha y hora actual con milisegundos
+      const fechaHoraActual = new Date();
+      const fechaHora = fechaHoraActual.toISOString().slice(0, 23).replace('T', ' ');
+
+      const lectura = {
+        id: datos.length + 1,
+        valor: valor,
+        fecha: fechaHora,
+      };
+
+      datos.push(lectura);
+      enviarActualizaciones();
+    }
+  });
   res.json({ mensaje: 'Conexión exitosa con Arduino' });
 });
 app.post('/borrar_datos_actual', (req, res) => {
@@ -151,7 +144,13 @@ app.post('/borrar_datos_actual', (req, res) => {
 });
 
 app.post('/desconectar_arduino', (req, res) => {
-  desconectar_arduino();
+  comPort1.close((err) => {
+    if (err) {
+      console.error('Error al cerrar la conexión:', err);
+    } else {
+      console.log('Conexión cerrada correctamente');
+    }
+  });
   res.json({ mensaje: 'Conexión cerrada exitosamente' });
 });
 
