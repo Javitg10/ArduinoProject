@@ -39,8 +39,9 @@
           <img src="assets/datos.png" alt="" style="height: 50px; width: 50px;">
           <span class="indicator"[class.active]="hayDatos"></span>
         </button>
-        <button class="btn btn-block" style="background-color:#00FFFF; border: 3px solid black; border-radius: 5px;" (click)="generarCSV()">
+        <button class="btn btn-block" [disabled]="!hayDatos"  style="background-color:#00FFFF; border: 3px solid black; border-radius: 5px;" (click)="generarCSV()">
           <img src="assets/documento.gif" alt="" style="height: 50px; width: 50px;">
+          <span class="indicator"[class.active]="hayDatos"></span>
         </button>
         <br>
         <h6 style="color: #EEEBD3; font-weight: bolder;">---Control BBDD---</h6>
@@ -194,10 +195,10 @@
                     <tbody>
                       <ng-container *ngFor="let lectura of lecturas">
                         <tr>
-                          <td>{{ lectura.id }}</td>
-                          <td>{{ lectura.fecha }}</td>
-                          <td>{{ lectura.valor }}</td>
-                          <td>{{ lectura.dni }}</td>
+                          <td style="font-size: 20px; color: #EEEBD3;">{{ lectura.id }}</td>
+                          <td style="font-size: 20px; color: #EEEBD3;">{{ lectura.fecha }}</td>
+                          <td style="font-size: 20px; color: #EEEBD3;">{{ lectura.valor }}</td>
+                          <td style="font-size: 20px; color: #EEEBD3;">{{ lectura.dni }}</td>
                         </tr>
                       </ng-container>
                     </tbody>

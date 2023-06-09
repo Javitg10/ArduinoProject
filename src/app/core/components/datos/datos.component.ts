@@ -30,8 +30,6 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
   hayDatos: boolean = false;
   stopConn: boolean = false;
   comParams: any;
-  filtroFecha!:string;
-  filtroDni!:string;
   
   @ViewChild('chartContainer') chartContainer!: ElementRef;
 
@@ -158,10 +156,10 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
   inicializarGrafico() {
     this.plotlyConfig = {
       responsive: true,
-      plot_bgcolor: '#92374D',
-    paper_bgcolor: '#92374D',
+      plot_bgcolor: '##FFFFFF',
+    paper_bgcolor: '##FFFFFF',
     line: { color: '#EEEBD3' },
-    marker: { color: '#EEEBD3' },
+    marker: { color: '##FFFFFF' },
     xaxis: {
       color: '#EEEBD3',
       tickfont: {
@@ -213,37 +211,40 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   confirmarEliminacion() {
-  Swal.fire({
-    title: '¿Estás seguro?',
-    text: 'Esta acción eliminará todos los datos de la tabla de lectura. ¿Deseas continuar?',
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Sí, borrar todo',
-    cancelButtonText: 'Cancelar'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      this.lecturas.splice(0, this.lecturas.length);
-      this.http.delete('http://localhost:3000/eliminar_datos', {}).subscribe(
-      (response: any) => {
-        Swal.fire(
-          'Eliminación exitosa',
-          'Todos los datos de la tabla de lectura han sido eliminados.',
-          'success'
-        );
+    Swal.fire({
+      title: 'Eliminar por DNI',
+      html:
+        '<input id="dni" class="swal2-input" placeholder="DNI" type="text">',
+      showCancelButton: true,
+      confirmButtonText: 'Eliminar',
+      preConfirm: () => {
+        return {
+          dni: (<HTMLInputElement>document.getElementById('dni')).value,
+        };     
       },
-      (error: any) => {
-        Swal.fire(
-          'Error',
-          'Ocurrió un error al intentar eliminar los datos.',
-          'error'
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const filtroDni = result.value;
+        this.http.delete(`http://localhost:3000/eliminar_datos/${filtroDni?.dni}`).subscribe(
+          (response: any) => {
+            Swal.fire(
+              'Eliminación exitosa',
+              'Todos los datos asociados al DNI han sido eliminados.',
+              'success'
+            );
+          },
+          (error: any) => {
+            Swal.fire(
+              'Error',
+              'Ocurrió un error al intentar eliminar los datos.',
+              'error'
+            );
+          }
         );
       }
-    );}else{
-      console.log("Eliminación anulada.")
-    }
-  });}
+    });
+  }
 
   guardarEstadoLocalStorage() {
     // Guardar las variables en el almacenamiento local
@@ -323,29 +324,27 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
       showCancelButton: true,
       confirmButtonText: 'Buscar',
       preConfirm: () => {
-        this.filtroFecha = (document.getElementById('fecha') as HTMLInputElement).value;
-        this.filtroDni = (document.getElementById('dni') as HTMLInputElement).value;
-  
-        this.realizarConsulta();
+        return {
+          dniSearch: (<HTMLInputElement>document.getElementById('dni')).value,
+          fechaSearch: parseInt((<HTMLInputElement>document.getElementById('fecha')).value),
+        };     
+      },allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const filtroDniFecha = result.value;
+        
+        this.http.post('http://localhost:3000/consultar_datos', filtroDniFecha).subscribe(
+          (response: any) => {
+            this.lecturas = response;
+            this.hayDatos = true;
+            this.guardarEstadoLocalStorage();
+          },
+          (error: any) => {
+            console.error(error);
+          }
+        );
       }
+
     });
   }
-  realizarConsulta() {
-    const fecha = this.filtroFecha;
-    const dni = this.filtroDni;
-  
-    // Realiza la consulta utilizando los valores de fecha y dni
-  
-    // Ejemplo de consulta utilizando HttpClient
-    this.http.post('http://localhost:3000/consultar_datos', { params: { fecha, dni } }).subscribe(
-      (response: any) => {
-        this.lecturas = response;
-        this.hayDatos = true;
-        this.guardarEstadoLocalStorage();
-      },
-      (error: any) => {
-        console.error(error);
-      }
-    );
-}
 }
