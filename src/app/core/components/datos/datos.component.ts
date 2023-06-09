@@ -276,6 +276,7 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
           dataBits: parseInt((<HTMLInputElement>document.getElementById('dataBitsInput')).value),
           stopBits: parseInt((<HTMLInputElement>document.getElementById('stopBitsInput')).value),
           parity: (<HTMLInputElement>document.getElementById('parityInput')).value,
+          currentDni: (<HTMLInputElement>document.getElementById('dniInput')).value
         };
       },
       allowOutsideClick: () => !Swal.isLoading()
@@ -336,10 +337,11 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
     // Realiza la consulta utilizando los valores de fecha y dni
   
     // Ejemplo de consulta utilizando HttpClient
-    this.http.get('http://localhost:3000/consulta', { params: { fecha, dni } }).subscribe(
+    this.http.post('http://localhost:3000/consultar_datos', { params: { fecha, dni } }).subscribe(
       (response: any) => {
-        // Procesa la respuesta de la consulta
-        console.log(response);
+        this.lecturas = response;
+        this.hayDatos = true;
+        this.guardarEstadoLocalStorage();
       },
       (error: any) => {
         console.error(error);
