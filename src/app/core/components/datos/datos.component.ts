@@ -5,9 +5,11 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import * as Plotly from 'plotly.js-dist-min';
 import Swal from 'sweetalert2';
+import * as Papa from 'papaparse';
 
 
 interface Lectura {
+  dni: string;
   id: number;
   valor: number;
   fecha: string;
@@ -61,6 +63,10 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
     if (storedStopConn) {
       this.stopConn = JSON.parse(storedStopConn);
     }
+    const storedcomParams = localStorage.getItem('comParams');
+    if (storedcomParams) {
+      this.comParams = JSON.parse(storedcomParams);
+    }
     
 
   }
@@ -103,7 +109,7 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
     );
   }
   reconectarArduino(): void {
-    this.detenerWebSocket();
+    this.iniciarWebSocket();
     this.http.post('http://localhost:3000/conectar_arduino', this.comParams).subscribe(
       (response: any) => {
         this.mensajeConexion = response.mensaje;
@@ -173,6 +179,7 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
   
     Plotly.update(this.chartContainer.nativeElement, { x: [xData], y: [yData] }, {}, [0]);
   }
+
   confirmarEliminacion() {
   Swal.fire({
     title: '¿Estás seguro?',
@@ -212,6 +219,7 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
     localStorage.setItem('btnActivo', JSON.stringify(this.ArduinoON));
     localStorage.setItem('hayDatos', JSON.stringify(this.hayDatos));
     localStorage.setItem('stopConn', JSON.stringify(this.stopConn));
+    localStorage.setItem('comParams', JSON.stringify(this.comParams));
   }
 
 
@@ -224,6 +232,7 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
         <input id="dataBitsInput" class="swal2-input" placeholder="Data Bits (ej: 8)">
         <input id="stopBitsInput" class="swal2-input" placeholder="Stop Bits (ej: 1)">
         <input id="parityInput" class="swal2-input" placeholder="Parity (ej: none)">
+        <input id="dniInput" class="swal2-input" placeholder="DNI Paciente: (ej: 99223344X)">
       `,
       showCancelButton: true,
       confirmButtonText: 'Conectar',
@@ -241,6 +250,7 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
     }).then((result) => {
       if (result.isConfirmed) {
         this.comParams = result.value;
+        this.guardarEstadoLocalStorage();
         this.iniciarWebSocket();
         this.http.post('http://localhost:3000/conectar_arduino', this.comParams).subscribe(
           (response: any) => {
@@ -254,5 +264,20 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
         );
       }
     });
+  }
+
+  generarCSV(): void {
+    const csv = Papa.unparse(this.lecturas);
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    if (link.download !== undefined) {
+      const url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      link.setAttribute('download', 'lecturas.csv');
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   }
 }
