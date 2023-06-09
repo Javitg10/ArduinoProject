@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 
 let comPort1;
 let datos = [];
-
+let currentDni;
 
 function enviarActualizaciones() {
     wss.clients.forEach((client) => {
@@ -72,12 +72,14 @@ app.post('/enviar_datos', (req, res) => {
     } else {
       console.log('Conexión a la base de datos establecida correctamente');
       datos.forEach((lectura) => {
+        const dni = currentDni;
+        const id = lectura.id;
         const fecha = lectura.fecha;
         const valor = lectura.valor;
 
         // Insertar los valores en la base de datos
-        const query = 'INSERT INTO lecturas (valor, fecha) VALUES (?, ?)';
-        connection.query(query, [valor, fecha], (error, results) => {
+        const query = 'INSERT INTO lecturas (dni,id, valor, fecha) VALUES (?, ?, ?, ?)';
+        connection.query(query, [dni, id, valor, fecha], (error, results) => {
           if (error) {
             console.error('Error al insertar los datos:', error);
             res.status(500).json({ error: 'Error al insertar los datos en la base de datos' });
@@ -93,7 +95,7 @@ app.post('/enviar_datos', (req, res) => {
 });
 app.post('/conectar_arduino', (req, res) => {
   const comParams = req.body; // Obtener los parámetros enviados desde el cliente
-
+  currentDni = comParams.currentDni;
   // Realizar la configuración de la conexión con Arduino utilizando los parámetros recibidos
   comPort1 = new SerialPort({
     path: comParams.path,
@@ -127,6 +129,7 @@ app.post('/conectar_arduino', (req, res) => {
       const fechaHora = fechaHoraActual.toISOString().slice(0, 23).replace('T', ' ');
 
       const lectura = {
+        dni: currentDni,
         id: datos.length + 1,
         valor: valor,
         fecha: fechaHora,

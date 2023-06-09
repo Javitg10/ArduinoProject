@@ -244,6 +244,7 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
           dataBits: parseInt((<HTMLInputElement>document.getElementById('dataBitsInput')).value),
           stopBits: parseInt((<HTMLInputElement>document.getElementById('stopBitsInput')).value),
           parity: (<HTMLInputElement>document.getElementById('parityInput')).value,
+          currentDni: (<HTMLInputElement>document.getElementById('dniInput')).value
         };
       },
       allowOutsideClick: () => !Swal.isLoading()
