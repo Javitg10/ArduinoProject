@@ -23,11 +23,11 @@
           <img src="assets/arduino.png" alt="">
           <span class="indicator"[class.active]="!ArduinoON"></span>
         </button>
-        <button class="btn btn-block" (click)="reconectarArduino()" [disabled]="!stopConn" style="background-color: #00979C; border: 2px solid black; border-radius: 2px;">
+        <button class="btn btn-block" (click)="reconectarArduino()" [disabled]="!stopConn" style="background-color: #00FFFF; border: 2px solid black; border-radius: 2px;">
           <img src="assets/reseteo.png" alt="">
           <span class="indicator"[class.active]="stopConn"></span>
         </button>
-        <button class="btn  btn-block" (click)="resetearArduino()" [disabled]="!hayDatos" style="background-color: orange; border: 2px solid black; border-radius: 2px;">
+        <button class="btn  btn-block" (click)="resetearArduino()" [disabled]="!hayDatos" style="background-color: #00FFFF; border: 2px solid black; border-radius: 2px;">
           <img src="assets/escoba.png" alt="">
           <span class="indicator"[class.active]="hayDatos"></span>
         </button>
@@ -52,7 +52,7 @@
       <section id="tabs">
         <div class="container">
           <h1 class="text-center">Tabla general</h1>
-                    <p class="text-center">En esta tabla, podrás apreciar tanto los datos como la gráfica que se pintarán ambas a tiempo real mientras se reciben datos desde la placa de arduino, tendrás muchas funcionalidades que las podrás conocer desde la pestaña de información, ¡Que lo disfrutes!</p>
+                    <p class="text-center">En esta tabla podrás apreciar tanto los datos como la gráfica que se pintarán ambas a tiempo real mientras se reciben datos desde la placa de arduino, tendrás muchas funcionalidades que las podrás conocer desde la pestaña de información, ¡Que lo disfrutes!</p>
                     
           <div class="row">
             <div class="col-xs-12">
