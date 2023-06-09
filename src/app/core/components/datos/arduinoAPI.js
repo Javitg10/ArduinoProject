@@ -8,7 +8,6 @@ const WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: 3030 });
 const bodyParser = require('body-parser');
 
-
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -16,6 +15,7 @@ app.use(bodyParser.json());
 let comPort1;
 let datos = [];
 let currentDni;
+
 
 function enviarActualizaciones() {
     wss.clients.forEach((client) => {
@@ -57,14 +57,12 @@ app.delete('/eliminar_datos', (req, res)=>{
 
 
 app.post('/enviar_datos', (req, res) => {
-  // Configuración de la conexión a la base de datos
   const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
     password: '',
     database: 'arduino_datos',
   });
-
   // Conexión a la base de datos
   connection.connect((err) => {
     if (err) {
@@ -145,7 +143,48 @@ app.post('/borrar_datos_actual', (req, res) => {
   datos.splice(0, datos.length);
   res.json({ mensaje: 'Los datos han sido borrados exitosamente' });
 });
+app.post('/consultar_datos', (req, res) => {
+  // Obtener los parámetros de búsqueda del cuerpo de la solicitud
+  const { dni, fecha } = req.body;
+  const connection = mysql.createConnection({
+    host: '127.0.0.1',
+    user: 'root',
+    password: '',
+    database: 'arduino_datos',
+  });
 
+  // Conexión a la base de datos
+  connection.connect((err) => {
+    if (err) {
+      console.error('Error al conectar a la base de datos:', err);
+      res.status(500).json({ error: 'Error al conectar a la base de datos' });
+    } else {
+      console.log('Conexión a la base de datos establecida correctamente');
+
+      // Construir la consulta SQL con los parámetros de búsqueda
+      let query = 'SELECT * FROM lecturas';
+
+      if (dni && fecha) {
+        query += ` WHERE dni = '${dni}' AND fecha = '${fecha}'`;
+      } else if (dni) {
+        query += ` WHERE dni = '${dni}'`;
+      } else if (fecha) {
+        query += ` WHERE fecha = '${fecha}'`;
+      }
+
+      // Ejecutar la consulta en la base de datos
+      connection.query(query, (error, results) => {
+        if (error) {
+          console.error('Error al consultar los datos:', error);
+          res.status(500).json({ error: 'Error al consultar los datos' });
+        } else {
+          console.log('Datos consultados correctamente:', results);
+          res.json(results);
+        }
+      });
+    }
+  });
+});
 app.post('/desconectar_arduino', (req, res) => {
   comPort1.close((err) => {
     if (err) {
