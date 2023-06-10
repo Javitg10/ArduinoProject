@@ -35,6 +35,9 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
   filtroFecha!: string;
   filtroHoraMinutos!: string;
   
+
+  
+  
   @ViewChild('chartContainer') chartContainer!: ElementRef;
 
   
@@ -74,7 +77,7 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
     
 
   }
-
+ 
   ngOnDestroy(): void {
     this.detenerWebSocket();
     this.destroy$.next();
@@ -368,5 +371,9 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
     this.filtroFecha = ''; 
     this.filtroHoraMinutos = '';
     this.lecturas = this.lecturasOriginal;
+  }
+  toggleFilterSection() {
+    const filterSection = document.getElementById("filterSection");
+    filterSection!.classList.toggle("show");
   }
 }
