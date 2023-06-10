@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import * as Plotly from 'plotly.js-dist-min';
 import Swal from 'sweetalert2';
 import * as Papa from 'papaparse';
+import { NgModel } from '@angular/forms';
 
 
 interface Lectura {
@@ -22,6 +23,7 @@ interface Lectura {
 })
 export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
   lecturas: Lectura[] = [];
+  lecturasOriginal: Lectura[] = [];
   mensajeConexion: string = '';
   private socket$!: WebSocketSubject<any>;
   private destroy$ = new Subject<void>();
@@ -30,6 +32,8 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
   hayDatos: boolean = false;
   stopConn: boolean = false;
   comParams: any;
+  filtroFecha!: string;
+  filtroHoraMinutos!: string;
   
   @ViewChild('chartContainer') chartContainer!: ElementRef;
 
@@ -156,33 +160,15 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
   inicializarGrafico() {
     this.plotlyConfig = {
       responsive: true,
-      plot_bgcolor: '##FFFFFF',
-    paper_bgcolor: '##FFFFFF',
-    line: { color: '#EEEBD3' },
-    marker: { color: '##FFFFFF' },
-    xaxis: {
-      color: '#EEEBD3',
-      tickfont: {
-        color: '#EEEBD3'
-      },
-      linewidth: 2, 
-      tickwidth: 2 
-    },
-    yaxis: {
-      color: '#EEEBD3',
-      tickfont: {
-        color: '#EEEBD3'
-      },
-      linewidth: 2,
-      tickwidth: 2 
-    }
-
+      automargin: true,
+      tickangle: -45
     };
 
     Plotly.newPlot(
       this.chartContainer.nativeElement,
       [{ y: [], type: 'scatter' }],
-      { margin: { t: 0 } },
+      { margin: { t: 0 },width: 700,
+      height: 500 },
       this.plotlyConfig
     );
     const chartContainerElement = this.chartContainer.nativeElement;
@@ -199,15 +185,8 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
       const milisegundos = fechaCompleta.getUTCMilliseconds().toString().padStart(3, '0');
       return `${hora}:${minuto}:${segundo}.${milisegundos}`;
     });
-    const update = {
-      'line.color': '#EEEBD3',
-      'marker.color': '#EEEBD3',
-      'plot_bgcolor': '#00979C',
-      'paper_bgcolor': '#00979C',
-      'line.width': 2
-    };
-  
-    Plotly.update(this.chartContainer.nativeElement, { x: [xData], y: [yData] }, update, [0]);
+    
+    Plotly.update(this.chartContainer.nativeElement, { x: [xData], y: [yData] }, {}, [0]);
   }
 
   confirmarEliminacion() {
@@ -319,14 +298,12 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
     Swal.fire({
       title: 'Filtro por DNI y Fecha',
       html:
-        '<input id="fecha" class="swal2-input" placeholder="Fecha" type="date">' +
         '<input id="dni" class="swal2-input" placeholder="DNI" type="text">',
       showCancelButton: true,
       confirmButtonText: 'Buscar',
       preConfirm: () => {
         return {
-          dniSearch: (<HTMLInputElement>document.getElementById('dni')).value,
-          fechaSearch: parseInt((<HTMLInputElement>document.getElementById('fecha')).value),
+          dniSearch: (<HTMLInputElement>document.getElementById('dni')).value
         };     
       },allowOutsideClick: () => !Swal.isLoading()
     }).then((result) => {
@@ -346,5 +323,50 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit{
       }
 
     });
+  }
+  cumpleFiltro(lectura: Lectura): boolean {
+    if (!this.filtroFecha && !this.filtroHoraMinutos) {
+      return true; // No hay filtro aplicado, mostrar todas las lecturas
+    }
+  
+    const filtroFechaCompleto = `${this.filtroFecha}T${this.filtroHoraMinutos}:00`;
+    const fechaLectura = new Date(lectura.fecha).toISOString();
+  
+    return fechaLectura === filtroFechaCompleto;
+  }
+  filtrarLecturas() {
+    // Obtener los valores de los filtros
+    const filtroFecha = this.filtroFecha;
+    const filtroHoraMinutos = this.filtroHoraMinutos;
+    this.lecturasOriginal = this.lecturas;
+    // Aplicar los filtros
+    this.lecturas = this.lecturas.filter(lectura => {
+      // Filtrar por fecha si se proporciona el filtro de fecha
+      if (filtroFecha) {
+        const fechaLectura = new Date(lectura.fecha);
+        const fechaFiltro = new Date(filtroFecha);
+        if (fechaLectura.getFullYear() !== fechaFiltro.getFullYear() ||
+            fechaLectura.getMonth() !== fechaFiltro.getMonth() ||
+            fechaLectura.getDate() !== fechaFiltro.getDate()) {
+          return false;
+        }
+      }
+  
+      // Filtrar por hora y minutos si se proporciona el filtro de hora y minutos
+      if (filtroHoraMinutos) {
+        const horaMinutosLectura = lectura.fecha.slice(11, 16);
+        if (horaMinutosLectura !== filtroHoraMinutos) {
+          return false;
+        }
+      }
+  
+      // Si no se aplicó ninguno de los filtros o ambos filtros coinciden, incluir la lectura
+      return true;
+    });
+  }
+  borrarFiltro(){
+    this.filtroFecha = ''; 
+    this.filtroHoraMinutos = '';
+    this.lecturas = this.lecturasOriginal;
   }
 }

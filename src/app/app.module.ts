@@ -8,7 +8,7 @@ import { AboutUsComponent } from './core/components/about-us/about-us.component'
 import { HeaderComponent } from './core/shared/header/header.component';
 import { FooterComponent } from './core/shared/footer/footer.component';
 import { DatosComponent } from './core/components/datos/datos.component';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,6 +20,7 @@ import { DatosComponent } from './core/components/datos/datos.component';
     DatosComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule

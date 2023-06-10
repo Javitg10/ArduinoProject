@@ -183,6 +183,16 @@
                   <h1 class="text-center">Datos</h1>
                   <p class="text-center">Se están generando datos automáticamente desde la placa de Arduino mediante tus movimientos. Compruébalos en esta tabla.</p>
                   <hr>
+                  <div class="filter-section">
+                    <label for="filterFecha">Fecha:</label>
+                    <input id="filterFecha" type="date" [(ngModel)]="filtroFecha">
+                    
+                    <label for="filterHoraMinutos">Hora y Minutos:</label>
+                    <input id="filterHoraMinutos" type="time" [(ngModel)]="filtroHoraMinutos">
+                  
+                    <button (click)="filtrarLecturas()">Filtrar</button>
+                    <button (click)="borrarFiltro()">Borrar</button>
+                  </div>
                   <table class="table table-striped">
                     <thead>
                       <tr>
