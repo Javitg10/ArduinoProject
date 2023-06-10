@@ -200,4 +200,18 @@ section .section-title {
     stroke-width: 2px; /* Ancho de las líneas de los ejes y los números de los ejes */
   }
 
+  #filterSection {
+    display: none;
+  }
+  
+  #filterSection.show {
+    display: block;
+  }
+  #filterFecha{
+    width: 40%;
+  }
+  #filterHoraMinutos{
+    width: 40%;
+  }
+
   
