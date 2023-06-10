@@ -4,29 +4,29 @@ section {
   margin-right: 10%;
   border: 8px solid black;
   border-radius: 6px;
-  color: #EEEBD3;;
+  color: #eeebd3;
   width: 2000px;
 }
-table{
-  border: 3px solid #EEEBD3;; 
+table {
+  border: 3px solid #eeebd3;
 }
-thead{
-  border: 3px solid #EEEBD3;;
+thead {
+  border: 3px solid #eeebd3;
 }
-th{
-  color: #EEEBD3;;
+th {
+  color: #eeebd3;
   font-weight: bolder;
 }
 section .section-title {
   text-align: center;
-  color: #EEEBD3;;
+  color: #eeebd3;
   margin-bottom: 50px;
   text-transform: uppercase;
 }
 
 #tabs {
-  background: #92374D;
-  color: #EEEBD3;;
+  background: #92374d;
+  color: #eeebd3;
   width: 1100px;
   margin-left: -1%;
 }
@@ -37,7 +37,7 @@ section .section-title {
 
 #tabs .nav-tabs .nav-item.show .nav-link,
 .nav-tabs .nav-link.active {
-  color: #EEEBD3;;
+  color: #eeebd3;
   background-color: transparent;
   border-color: transparent transparent black;
   border-bottom: 4px solid !important;
@@ -47,171 +47,158 @@ section .section-title {
 
 #tabs .nav-tabs .nav-link {
   border: 1px solid transparent;
-  border-top-left-radius: .25rem;
-  border-top-right-radius: .25rem;
-  color: #EEEBD3;;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  color: #eeebd3;
   font-size: 20px;
 }
 #cabecera {
-    background-color: #00979C;
-    margin: 3%;
-    border-radius: 10px;
-    border: 3px solid black;
-    -webkit-box-shadow: 5px 5px 47px 17px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 5px 5px 47px 17px rgba(0, 0, 0, 0.75);
-    box-shadow: 5px 5px 47px 17px rgba(0, 0, 0, 0.75);
-  }
-  .hover-effect {
-    /* Estilos regulares del botón */
-    /* ... */
-  
-    /* Estilos para el efecto hover */
-    box-shadow: 0 0 0 transparent; /* Establece un borde inicial sin tamaño ni color */
-   
-    transition: box-shadow 0.3s ease; /* Transición suave de 0.3 segundos */
-  }
-  
-  .hover-effect:hover {
-    box-shadow: 0 0 0 5px black; /* Establece el tamaño y color del borde */
-    
-  }
+  background-color: #00979c;
+  margin: 3%;
+  border-radius: 10px;
+  border: 3px solid black;
+  -webkit-box-shadow: 5px 5px 47px 17px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 5px 5px 47px 17px rgba(0, 0, 0, 0.75);
+  box-shadow: 5px 5px 47px 17px rgba(0, 0, 0, 0.75);
+}
+.hover-effect {
+  box-shadow: 0 0 0 transparent;
 
-  #chartContainer {
-    width: 100%;
-    height: 600px;
-  }
-  
-  .plotly-graph-div {
-    margin: 20px auto;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    background-color: #fff;
-  }
-  
-  .plotly-graph-div .modebar-container {
-    display: none !important;
-  }
-  
-  .plotly-graph-div .modebar-btn {
-    display: none !important;
-  }
-  
-  .plotly-graph-div .hoverlayer {
-    z-index: 1 !important;
-  }
-  
-  .button-container {
-    border: 8px solid black;
-    border-radius: 3px;
-    padding: 10px;
-    background-color: #92374D;
-    margin-bottom: 2px;
-    position: relative;
-  }
-  #divBotones{
-    margin-top: 0%;
-    margin-left: -10%;
-  }
-  .indicator {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    display: inline-block;
-    margin-left: 10px;
-    background-color: red;
-  }
-  
-  .indicator.active {
-    background-color: green;
-  }
-  .arduino-container {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .blink-animation {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: yellow;
+  transition: box-shadow 0.3s ease;
+}
+
+.hover-effect:hover {
+  box-shadow: 0 0 0 5px black;
+}
+
+#chartContainer {
+  width: 100%;
+  height: 600px;
+}
+
+.plotly-graph-div {
+  margin: 20px auto;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.plotly-graph-div .modebar-container {
+  display: none !important;
+}
+
+.plotly-graph-div .modebar-btn {
+  display: none !important;
+}
+
+.plotly-graph-div .hoverlayer {
+  z-index: 1 !important;
+}
+
+.button-container {
+  border: 8px solid black;
+  border-radius: 3px;
+  padding: 10px;
+  background-color: #92374d;
+  margin-bottom: 2px;
+  position: relative;
+}
+#divBotones {
+  margin-top: 0%;
+  margin-left: -10%;
+}
+.indicator {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 10px;
+  background-color: red;
+}
+
+.indicator.active {
+  background-color: green;
+}
+.arduino-container {
+  position: relative;
+  display: inline-block;
+}
+
+.blink-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: yellow;
+  opacity: 0;
+  animation: blink 1s infinite alternate;
+}
+
+@keyframes blink {
+  0% {
     opacity: 0;
-    animation: blink 1s infinite alternate;
   }
-  
-  @keyframes blink {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
+  100% {
+    opacity: 1;
   }
-  
-  .arduino-logo {
-    width: 50%;
-    height: 50%;
-    position: relative;
-    z-index: 1;
-  }
-  
-  
-  .card {
-    max-width: 500px;
-    margin-bottom: 30px;
-    height: 100%;
-  }
+}
 
-  .card-body {
-    padding: 10px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+.arduino-logo {
+  width: 50%;
+  height: 50%;
+  position: relative;
+  z-index: 1;
+}
 
-  .card-title {
-    font-size: 25px;
-    font-weight: 900;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    text-align: center;
-    color: #00979C;
-  }
+.card {
+  max-width: 500px;
+  margin-bottom: 30px;
+  height: 100%;
+}
 
-  .card-text {
-    font-size: 14px;
-    margin-bottom: 10px;
-  }
+.card-body {
+  padding: 10px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
-  .card-img-top {
-    max-height: 75px;
-    object-fit: contain;
-  }
+.card-title {
+  font-size: 25px;
+  font-weight: 900;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  text-align: center;
+  color: #00979c;
+}
 
-  #containerInfo{
-    background-color: #003554; 
-    border: 3px solid black;
-  }
- 
-  .custom-chart-style .plotly svg g g g line,
-  .custom-chart-style .plotly svg g g g text {
-    stroke-width: 2px; /* Ancho de las líneas de los ejes y los números de los ejes */
-  }
+.card-text {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
 
-  #filterSection {
-    display: none;
-  }
-  
-  #filterSection.show {
-    display: block;
-  }
-  #filterFecha{
-    width: 40%;
-  }
-  #filterHoraMinutos{
-    width: 40%;
-  }
+.card-img-top {
+  max-height: 75px;
+  object-fit: contain;
+}
 
-  
+#containerInfo {
+  background-color: #003554;
+  border: 3px solid black;
+}
+
+#filterSection {
+  display: none;
+}
+
+#filterSection.show {
+  display: block;
+}
+#filterFecha {
+  width: 40%;
+}
+#filterHoraMinutos {
+  width: 40%;
+}

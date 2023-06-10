@@ -225,29 +225,30 @@
                   <p class="text-center">Se están generando datos automáticamente desde la placa de Arduino mediante tus
                     movimientos. Compruébalos en esta tabla.</p>
                   <hr>
-                  <button class="btn bg-dark text-#EEEBD3 toggle-button"  (click)="toggleFilterSection()" style="margin-left: 40%;">Abrir/Cerrar Filtro</button>
+                  <button class="btn bg-dark text-#EEEBD3 toggle-button" (click)="toggleFilterSection()"
+                    style="margin-left: 40%;">Abrir/Cerrar Filtro</button>
                   <br>
                   <div id="filterSection" class="filter-section form-group">
-                      <div class="row">
-                        <div class="col">
-                          <label for="filterFecha">Fecha:</label>
-                          <input id="filterFecha" type="date" [(ngModel)]="filtroFecha" class="form-control">
-                        </div>
-                        <div class="col" style="margin-left: -40%;">
-                          <label for="filterHoraMinutos">Hora y Minutos:</label>
-                          <input id="filterHoraMinutos" type="time" [(ngModel)]="filtroHoraMinutos" class="form-control">
-                        </div>
+                    <div class="row">
+                      <div class="col">
+                        <label for="filterFecha">Fecha:</label>
+                        <input id="filterFecha" type="date" [(ngModel)]="filtroFecha" class="form-control">
                       </div>
-                      <br>
-
-                      <div class="row">
-                        <div class="col">
-                          <button class="btn btn-dark text-#EEEBD3" (click)="filtrarLecturas()">Filtrar</button>
-                        
-                          <button class="btn btn-dark text-#EEEBD3"   (click)="borrarFiltro()">Borrar</button>
-                        </div>
+                      <div class="col" style="margin-left: -40%;">
+                        <label for="filterHoraMinutos">Hora y Minutos:</label>
+                        <input id="filterHoraMinutos" type="time" [(ngModel)]="filtroHoraMinutos" class="form-control">
                       </div>
                     </div>
+                    <br>
+
+                    <div class="row">
+                      <div class="col">
+                        <button class="btn btn-dark text-#EEEBD3" (click)="filtrarLecturas()">Filtrar</button>
+
+                        <button class="btn btn-dark text-#EEEBD3" (click)="borrarFiltro()">Borrar</button>
+                      </div>
+                    </div>
+                  </div>
 
                   <table class="table table-striped">
                     <thead>
@@ -287,6 +288,8 @@
   <br>
 
 </div>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
   $(document).ready(function () {
