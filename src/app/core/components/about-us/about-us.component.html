@@ -3,40 +3,51 @@
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center">
   <div class="col-md-5 p-lg-5 mx-auto my-5">
     <h1 class="display-4 fw-normal" style="color: white;">Nuestro proyecto</h1>
-    <p class="lead fw-normal " style="color: white;">Descubra mucho más sobre Arduino y sus aplicaciones al mundo de la electromiografía..</p>
+    <p class="lead fw-normal " style="color: white;">Descubra mucho más sobre Arduino y sus aplicaciones al mundo de la
+      electromiografía..</p>
   </div>
   <div class="product-device shadow-sm d-none d-md-block"></div>
   <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
   <img class="background-image" src="/assets/semiconductor.jpg">
 </div>
 
-<div class="container px-4 py-5 align-content-center" style="width: 120%
-;">
-<h2 class="pb-2 border-bottom" style="font-weight: bolder; color:#EEEBD3; display: flex; align-items: flex-end;">
+<div class="container px-4 py-5 align-content-center" style="width: 120%;">
+  <h2 class="pb-2 border-bottom" style="font-weight: bolder; color:#EEEBD3; display: flex; align-items: flex-end;">
     ArduinoMuscle
     <img src="assets/salesianas.png" alt="" style="height: 100px; width: 200px; margin-left: 680px;">
-</h2>
-  
+  </h2>
+
   <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-    <div class="col-4 d-flex align-items-start" style="border: 2px solid black; background-color: #00979D; margin-left: -10%; margin-right: 4%;">
+    <div class="col-4 d-flex align-items-start"
+      style="border: 2px solid black; background-color: #00979D; margin-left: -10%; margin-right: 4%;">
       <div style="padding: 30px;">
         <h2 class="text-center" style="font-weight: bolder;">Comienzo</h2>
         <hr style="height: 5px; color: black; background-color: black; border: none;">
-        <p>Este proyecto consiste en un sistema basado en Arduino que utiliza sensores de electromiografía (EMG) para medir la actividad muscular. Estos sensores capturan las señales eléctricas generadas por los músculos y las convierten en datos digitales.</p>
+        <p>Este proyecto consiste en un sistema basado en Arduino que utiliza sensores de electromiografía (EMG) para
+          medir la actividad muscular. Estos sensores capturan las señales eléctricas generadas por los músculos y las
+          convierten en datos digitales.</p>
       </div>
     </div>
-    <div class="col-4 d-flex align-items-start " style="border: 2px solid black; background-color: #92374D; margin-right: 4%">
+    <div class="col-4 d-flex align-items-start "
+      style="border: 2px solid black; background-color: #92374D; margin-right: 4%">
       <div style="padding: 30px;">
         <h2 class="text-center" style="font-weight: bolder; color: #EEEBD3;">Adaptación</h2>
         <hr style="height: 5px; color: black; background-color: black; border: none;">
-        <p style="color: #EEEBD3;">Utilizando Node.js como backend y Angular como frontend, el sistema recopila los datos de los sensores y los procesa para generar una representación visual en forma de gráfica. Esta gráfica muestra en tiempo real la actividad muscular, permitiendo visualizar y analizar la fuerza y contracción de los músculos durante distintas actividades o ejercicios.</p>
+        <p style="color: #EEEBD3;">Utilizando Node.js como backend y Angular como frontend, el sistema recopila los
+          datos de los sensores y los procesa para generar una representación visual en forma de gráfica. Esta gráfica
+          muestra en tiempo real la actividad muscular, permitiendo visualizar y analizar la fuerza y contracción de los
+          músculos durante distintas actividades o ejercicios.</p>
       </div>
     </div>
     <div class="col-4 d-flex align-items-start " style="border: 2px solid black; background-color: #eeebd3;">
       <div style="padding: 30px;">
         <h2 class="text-center" style="font-weight: bolder;">Aplicación</h2>
         <hr style="height: 5px; color: black; background-color: black; border: none;">
-        <p>Este proyecto combina la tecnología de Arduino, los sensores EMG y las herramientas de desarrollo web para proporcionar una solución práctica y eficiente en el campo de la medición de la actividad muscular. Con su capacidad de monitoreo en tiempo real y análisis avanzado, ofrece beneficios tanto para profesionales de la salud y rehabilitación, como para deportistas y entusiastas del fitness que deseen mejorar su rendimiento y controlar su actividad muscular de manera precisa y efectiva.</p>
+        <p>Este proyecto combina la tecnología de Arduino, los sensores EMG y las herramientas de desarrollo web para
+          proporcionar una solución práctica y eficiente en el campo de la medición de la actividad muscular. Con su
+          capacidad de monitoreo en tiempo real y análisis avanzado, ofrece beneficios tanto para profesionales de la
+          salud y rehabilitación, como para deportistas y entusiastas del fitness que deseen mejorar su rendimiento y
+          controlar su actividad muscular de manera precisa y efectiva.</p>
       </div>
     </div>
   </div>
@@ -52,7 +63,9 @@
             <div class="content">
               <h2 class="fw-bold text-center" style="color: #EEEBD3;">Los creadores</h2>
               <p style="color: #EEEBD3;">
-                Somos dos jóvenes estudiantes de las Escuelas Salesianas de María Auxiliadora de Nervión, en Sevilla, comenzamos este proyecto porque se nos ofreció y nos pareció algo muy interesante y útil de desarrollar, es por esto que decidimos embarcarnos en esta aventura.
+                Somos dos jóvenes estudiantes de las Escuelas Salesianas de María Auxiliadora de Nervión, en Sevilla,
+                comenzamos este proyecto porque se nos ofreció y nos pareció algo muy interesante y útil de desarrollar,
+                es por esto que decidimos embarcarnos en esta aventura.
                 Si queréis conocer mas acerca de nosotros pulsad aquí
               </p>
             </div>
@@ -63,51 +76,30 @@
   </div>
 </section>
 
-<!-- Botón -->
+
 <div class="text-center">
   <button class="btn btn-primary" (click)="showCards()">Creadores</button>
 </div>
 
-<!-- Tarjetas -->
+
 <div *ngIf="showCardSection">
-    <div class="demo">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div id="testimonial-slider" class="owl-carousel">
-              <div class="testimonial">
-                <div class="pic">
-                  <img src="assets/Treig.png" alt="">
-                </div>
-                <div class="testimonial-content">
-                  <h3 class="title">Javier Treig Gómez</h3>
-                  <span class="post">Creador</span>
-                  <p class="description">
-                    Estudiante del grado superior de Desarrollo de Aplicaciones Multiplataforma (DAM) en las Escuelas Salesianas de María Auxiliadora de Nervión, en Sevilla. Como alumno de este programa, me he dedicado al estudio y desarrollo de aplicaciones informáticas, adquiriendo habilidades en programación, diseño de interfaces, gestión de bases de datos y desarrollo de software.</p>
-                </div>
+  <div class="demo">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div id="testimonial-slider" class="owl-carousel">
+            <div class="testimonial">
+              <div class="pic">
+                <img src="assets/Treig.png" alt="">
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="demo2">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div id="testimonial-slider" class="owl-carousel">
-              <div class="testimonial">
-                <div class="pic">
-                  <img src="assets/Gamboa.jpg" alt="">
-                </div>
-                <div class="testimonial-content">
-                  <h3 class="title">José Manuel Gamboa Montilla</h3>
-                  <span class="post">Creador</span>
-                  <p class="description">
-                    Estudiante del grado superior de Desarrollo de Aplicaciones Multiplataforma (DAM) en las Escuelas Salesianas de María Auxiliadora de Nervión, en Sevilla. Durante el curso he aprendido a desarrollar aplicaciones web en ambas partes (BACK y FRONT), además de la creación de servidores con JavaScript, tratamiento de BigData con Spark y gestiones de bases de datos relacionales y no relaciones.
-                  </p>
-                </div>
+              <div class="testimonial-content">
+                <h3 class="title">Javier Treig Gómez</h3>
+                <span class="post">Creador</span>
+                <p class="description">
+                  Estudiante del grado superior de Desarrollo de Aplicaciones Multiplataforma (DAM) en las Escuelas
+                  Salesianas de María Auxiliadora de Nervión, en Sevilla. Como alumno de este programa, me he dedicado
+                  al estudio y desarrollo de aplicaciones informáticas, adquiriendo habilidades en programación, diseño
+                  de interfaces, gestión de bases de datos y desarrollo de software.</p>
               </div>
             </div>
           </div>
@@ -115,6 +107,33 @@
       </div>
     </div>
   </div>
+
+  <div class="demo2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div id="testimonial-slider" class="owl-carousel">
+            <div class="testimonial">
+              <div class="pic">
+                <img src="assets/Gamboa.jpg" alt="">
+              </div>
+              <div class="testimonial-content">
+                <h3 class="title">José Manuel Gamboa Montilla</h3>
+                <span class="post">Creador</span>
+                <p class="description">
+                  Estudiante del grado superior de Desarrollo de Aplicaciones Multiplataforma (DAM) en las Escuelas
+                  Salesianas de María Auxiliadora de Nervión, en Sevilla. Durante el curso he aprendido a desarrollar
+                  aplicaciones web en ambas partes (BACK y FRONT), además de la creación de servidores con JavaScript,
+                  tratamiento de BigData con Spark y gestiones de bases de datos relacionales y no relaciones.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <app-footer></app-footer>
