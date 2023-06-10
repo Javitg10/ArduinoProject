@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-about-us',
@@ -14,9 +14,9 @@ export class AboutUsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-    showCardSection: boolean = false;
-  
-    showCards() {
-      this.showCardSection = true;
-    }
+  showCardSection: boolean = false;
+  //Este metodo utiliza la variable dentro de un metodo asocidaco a un boton para mostrar las cards de presentacion de los dos integrantes
+  showCards() {
+    this.showCardSection = true;
   }
+}

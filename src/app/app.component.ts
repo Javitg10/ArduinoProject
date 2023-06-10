@@ -6,7 +6,8 @@ import { AfterViewInit, Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewInit{
-  title = 'ProyectoArduino';
+  title = 'ArduinoMuscle';
+//Este metodo hace que el scroll se vea de diferente manera
   ngAfterViewInit(): void {
     document.body.classList.add('scrollable');
   }

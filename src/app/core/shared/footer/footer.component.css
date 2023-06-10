@@ -1,21 +1,19 @@
 footer {
-    
-    bottom: 0;
-    background-color: #92374d;
-  }
+  bottom: 0;
+  background-color: #92374d;
+}
 
-  p {
-    font-family: 'Monrad Grotesk', sans-serif;
-  }
+p {
+  font-family: "Monrad Grotesk", sans-serif;
+}
 
-  a {
-    text-decoration: none;
-  }
-  .social-icons {
-    display: flex;
-  }
-  
-  .social-icons a {
-    margin-right: 10px;
-  }
-  
+a {
+  text-decoration: none;
+}
+.social-icons {
+  display: flex;
+}
+
+.social-icons a {
+  margin-right: 10px;
+}
