@@ -1,251 +1,482 @@
-<app-header></app-header>
-<br><br>
+<app-header></app-header> <br /><br />
 
 <div class="text-center" id="cabecera">
-  <br>
-  <h1 style="font-weight: bolder;">¡Bienvenido a la experiencia Arduino!</h1>
+  <br />
+  <h1 style="font-weight: bolder">¡Bienvenido a la experiencia Arduino!</h1>
 
   <div class="arduino-container">
-    <img src="assets/ArduinoMuscle.png" alt="Arduino Logo" class="arduino-logo">
+    <img
+      src="assets/ArduinoMuscle.png"
+      alt="Arduino Logo"
+      class="arduino-logo"
+    />
   </div>
 
-  <p class="text-center" style="margin: 20px;">En esta parte de nuestra web, podrás medirte en tiempo real tus
-    movimientos musculares y visualizarlos de manera interactiva con Arduino. Podrás comprobar desde tus mismos musculos
-    el funcionamiento de ellos y sobre todo y lo más importante podrás coger estos datos y guardarlos en una base de
-    datos, que te ayudará a poder comprobarlos cuando quieras.</p>
-
+  <p class="text-center" style="margin: 20px">
+    En esta parte de nuestra web, podrás medirte en tiempo real tus movimientos
+    musculares y visualizarlos de manera interactiva con Arduino. Podrás
+    comprobar desde tus mismos musculos el funcionamiento de ellos y sobre todo
+    y lo más importante podrás coger estos datos y guardarlos en una base de
+    datos, que te ayudará a poder comprobarlos cuando quieras.
+  </p>
 </div>
 
-<br>
+<br />
 <div class="container">
   <div class="row">
     <div class="col-md-2" id="divBotones">
       <div class="button-container">
-        <h6 style="color: #EEEBD3; font-weight: bolder;">-Control Arduino-</h6>
-        <button class="btn btn-block" (click)="construirArduino()" [disabled]="ArduinoON"
-          style="background-color: #00FFFF; border: 2px solid black; border-radius: 2px;">
-          <img src="assets/arduino.png" alt="" style="height: 50px; width: 50px;">
+        <h6 style="color: #eeebd3; font-weight: bolder">-Control Arduino-</h6>
+        <button
+          class="btn btn-block"
+          (click)="construirArduino()"
+          [disabled]="ArduinoON"
+          style="
+            background-color: #00ffff;
+            border: 2px solid black;
+            border-radius: 2px;
+          "
+        >
+          <img
+            src="assets/arduino.png"
+            alt=""
+            style="height: 50px; width: 50px"
+          />
           <span class="indicator" [class.active]="!ArduinoON"></span>
         </button>
-        <button class="btn btn-block" (click)="reconectarArduino()" [disabled]="!stopConn"
-          style="background-color: #00FFFF; border: 2px solid black; border-radius: 2px;">
-          <img src="assets/reseteo.png" alt="" style="height: 50px; width: 50px;">
+        <button
+          class="btn btn-block"
+          (click)="reconectarArduino()"
+          [disabled]="!stopConn"
+          style="
+            background-color: #00ffff;
+            border: 2px solid black;
+            border-radius: 2px;
+          "
+        >
+          <img
+            src="assets/reseteo.png"
+            alt=""
+            style="height: 50px; width: 50px"
+          />
           <span class="indicator" [class.active]="stopConn"></span>
         </button>
-        <button class="btn  btn-block" (click)="resetearArduino()" [disabled]="!hayDatos"
-          style="background-color: #00FFFF; border: 2px solid black; border-radius: 2px;">
-          <img src="assets/escoba.png" alt="" style="height: 50px; width: 50px;">
+        <button
+          class="btn btn-block"
+          (click)="borrarDatosServidor()"
+          [disabled]="!hayDatos"
+          style="
+            background-color: #00ffff;
+            border: 2px solid black;
+            border-radius: 2px;
+          "
+        >
+          <img
+            src="assets/escoba.png"
+            alt=""
+            style="height: 50px; width: 50px"
+          />
           <span class="indicator" [class.active]="hayDatos"></span>
         </button>
-        <button class="btn  btn-block" (click)="desconectarArduino()" [disabled]="!ArduinoON"
-          style="background-color: #00FFFF; border: 2px solid black; border-radius: 2px;">
-          <img src="assets/desconectado.png" alt="" style="height: 50px; width: 50px;">
+        <button
+          class="btn btn-block"
+          (click)="desconectarArduino()"
+          [disabled]="!ArduinoON"
+          style="
+            background-color: #00ffff;
+            border: 2px solid black;
+            border-radius: 2px;
+          "
+        >
+          <img
+            src="assets/desconectado.png"
+            alt=""
+            style="height: 50px; width: 50px"
+          />
           <span class="indicator" [class.active]="ArduinoON"></span>
         </button>
-        <button class="btn btn-block" (click)="enviarDatos()" [disabled]="!hayDatos"
-          style="background-color: #00FFFF; border: 2px solid black; border-radius: 2px;">
-          <img src="assets/datos.png" alt="" style="height: 50px; width: 50px;">
+        <button
+          class="btn btn-block"
+          (click)="enviarDatos()"
+          [disabled]="!hayDatos"
+          style="
+            background-color: #00ffff;
+            border: 2px solid black;
+            border-radius: 2px;
+          "
+        >
+          <img
+            src="assets/datos.png"
+            alt=""
+            style="height: 50px; width: 50px"
+          />
           <span class="indicator" [class.active]="hayDatos"></span>
         </button>
-        <button class="btn btn-block" [disabled]="!hayDatos"
-          style="background-color:#00FFFF; border: 3px solid black; border-radius: 5px;" (click)="generarCSV()">
-          <img src="assets/documento.gif" alt="" style="height: 50px; width: 50px;">
+        <button
+          class="btn btn-block"
+          [disabled]="!hayDatos"
+          style="
+            background-color: #00ffff;
+            border: 3px solid black;
+            border-radius: 5px;
+          "
+          (click)="generarCSV()"
+        >
+          <img
+            src="assets/documento.gif"
+            alt=""
+            style="height: 50px; width: 50px"
+          />
           <span class="indicator" [class.active]="hayDatos"></span>
         </button>
-        <br>
-        <h6 style="color: #EEEBD3; font-weight: bolder;">---Control BBDD---</h6>
-        <button class="btn btn-block" style="background-color:#00FFFF; border: 3px solid black; border-radius: 5px;"
-          (click)="confirmarEliminacion()">
-          <img src="assets/borrar.gif" alt="" style="height: 50px; width: 50px;">
+        <br />
+        <h6 style="color: #eeebd3; font-weight: bolder">---Control BBDD---</h6>
+        <button
+          class="btn btn-block"
+          style="
+            background-color: #00ffff;
+            border: 3px solid black;
+            border-radius: 5px;
+          "
+          (click)="confirmarEliminacion()"
+        >
+          <img
+            src="assets/borrar.gif"
+            alt=""
+            style="height: 50px; width: 50px"
+          />
         </button>
-        <button class="btn btn-block" style="background-color:#00FFFF; border: 3px solid black; border-radius: 5px;"
-          (click)="Filtro()">
-          <img src="assets/filtro.png" alt="" style="height: 50px; width: 50px;">
+        <button
+          class="btn btn-block"
+          style="
+            background-color: #00ffff;
+            border: 3px solid black;
+            border-radius: 5px;
+          "
+          (click)="Filtro()"
+        >
+          <img
+            src="assets/filtro.png"
+            alt=""
+            style="height: 50px; width: 50px"
+          />
         </button>
-
-
       </div>
     </div>
 
-    <div class="col-md-10" style="width: 1200px;">
+    <div class="col-md-10" style="width: 1200px">
       <section id="tabs">
         <div class="container">
           <h1 class="text-center">Tabla general</h1>
-          <p class="text-center">En esta tabla podrás apreciar tanto los datos como la gráfica que se pintarán ambas a
-            tiempo real mientras se reciben datos desde la placa de arduino, tendrás muchas funcionalidades que las
-            podrás conocer desde la pestaña de información, ¡Que lo disfrutes!</p>
+          <p class="text-center">
+            En esta tabla podrás apreciar tanto los datos como la gráfica que se
+            pintarán ambas a tiempo real mientras se reciben datos desde la
+            placa de arduino, tendrás muchas funcionalidades que las podrás
+            conocer desde la pestaña de información, ¡Que lo disfrutes!
+          </p>
 
           <div class="row">
             <div class="col-xs-12">
               <ul class="nav nav-tabs">
                 <li class="nav-item">
-                  <a class="nav-link active" href="#tab1" data-toggle="tab">Información</a>
+                  <a class="nav-link active" href="#tab1" data-toggle="tab"
+                    >Información</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#tab2" data-toggle="tab">Tabla de datos</a>
+                  <a class="nav-link" href="#tab2" data-toggle="tab"
+                    >Tabla de datos</a
+                  >
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#tab3" data-toggle="tab">Gráfica</a>
                 </li>
               </ul>
-              <br>
-              <h6 class="section-title h1 text-center">{{ mensajeConexion }}</h6>
-              <br>
+              <br />
+              <h6 class="section-title h1 text-center">
+                {{ mensajeConexion }}
+              </h6>
+              <br />
               <div class="tab-content justify-content-center">
                 <div class="tab-pane active" id="tab1">
                   <div class="justify-content-center">
                     <h1 class="text-center">Información</h1>
-                    <p class="text-center">En este apartado conocerás la funcionalidad de cada uno de los botones que
-                      aparecen en la tabla, viene explicado concretamente lo que cada uno realiza y se podrá conocer que
-                      hace cada uno de ellos con su información detallada al completo.</p>
-                    <br>
+                    <p class="text-center">
+                      En este apartado conocerás la funcionalidad de cada uno de
+                      los botones que aparecen en la tabla, viene explicado
+                      concretamente lo que cada uno realiza y se podrá conocer
+                      que hace cada uno de ellos con su información detallada al
+                      completo.
+                    </p>
+                    <br />
                     <div class="container">
                       <div class="row">
                         <div class="col-md-6">
-                          <div class="card text-#EEEBD3 mb-3" id="containerInfo">
-                            <br>
-                            <img src="assets/arduino.png" class="card-img-top" alt="Conectar Arduino">
+                          <div
+                            class="card text-#EEEBD3 mb-3"
+                            id="containerInfo"
+                          >
+                            <br />
+                            <img
+                              src="assets/arduino.png"
+                              class="card-img-top"
+                              alt="Conectar Arduino"
+                            />
                             <div class="card-body">
                               <h5 class="card-title">CONECTAR</h5>
-                              <p class="card-text-white">Inicia la conexión con Arduino.</p>
-                              <p class="card-text-white">Funcionalidad: Llama a los métodos inicializarGrafico() e
-                                iniciarWebSocket(), y luego realiza una solicitud HTTP POST a la URL
-                                "http://localhost:3000/conectar_arduino". Cuando recibe una respuesta exitosa, actualiza
-                                el mensaje de conexión, habilita el botón y establece la variable hayDatos en verdadero.
+                              <p class="card-text-white">
+                                Inicia la conexión con Arduino.
+                              </p>
+                              <p class="card-text-white">
+                                Funcionalidad: Llama a los métodos
+                                inicializarGrafico() e iniciarWebSocket(), y
+                                luego realiza una solicitud HTTP POST a la URL
+                                "http://localhost:3000/conectar_arduino". Cuando
+                                recibe una respuesta exitosa, actualiza el
+                                mensaje de conexión, habilita el botón y
+                                establece la variable hayDatos en verdadero.
                               </p>
                             </div>
                           </div>
                         </div>
-                        <br>
+                        <br />
                         <div class="col-md-6">
-                          <div class="card text-#EEEBD3 mb-3" id="containerInfo">
-                            <br>
-                            <img src="assets/escoba.png" class="card-img-top" alt="Resetear Arduino">
+                          <div
+                            class="card text-#EEEBD3 mb-3"
+                            id="containerInfo"
+                          >
+                            <br />
+                            <img
+                              src="assets/escoba.png"
+                              class="card-img-top"
+                              alt="Resetear Arduino"
+                            />
                             <div class="card-body">
                               <h5 class="card-title">LIMPIAR DATOS</h5>
-                              <p class="card-text-white">Reinicia la conexión con Arduino.</p>
-                              <p class="card-text-white">Funcionalidad: Llama a los métodos inicializarGrafico() e
-                                iniciarWebSocket(), y luego realiza una solicitud HTTP POST a la URL
-                                "http://localhost:3000/resetear_arduino". Cuando recibe una respuesta exitosa, actualiza
-                                el mensaje de conexión, habilita el botón y establece la variable hayDatos en verdadero.
+                              <p class="card-text-white">
+                                Reinicia la conexión con Arduino.
+                              </p>
+                              <p class="card-text-white">
+                                Funcionalidad: Llama a los métodos
+                                inicializarGrafico() e iniciarWebSocket(), y
+                                luego realiza una solicitud HTTP POST a la URL
+                                "http://localhost:3000/resetear_arduino". Cuando
+                                recibe una respuesta exitosa, actualiza el
+                                mensaje de conexión, habilita el botón y
+                                establece la variable hayDatos en verdadero.
                               </p>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <br>
+                      <br />
                       <div class="row">
                         <div class="col-md-6">
-                          <div class="card text-#EEEBD3 mb-3" id="containerInfo">
-                            <br>
-                            <img src="assets/desconectado.png" class="card-img-top" alt="Desconectar Arduino">
+                          <div
+                            class="card text-#EEEBD3 mb-3"
+                            id="containerInfo"
+                          >
+                            <br />
+                            <img
+                              src="assets/desconectado.png"
+                              class="card-img-top"
+                              alt="Desconectar Arduino"
+                            />
                             <div class="card-body">
                               <h5 class="card-title">DESCONECTAR</h5>
                               <p class="card-text-white">Desconecta Arduino.</p>
-                              <p class="card-text-white">Funcionalidad: Llama al método detenerWebSocket(), y luego
-                                realiza una solicitud HTTP POST a la URL "http://localhost:3000/desconectar_arduino".
-                                Cuando recibe una respuesta exitosa, actualiza el mensaje de conexión y deshabilita el
-                                botón.</p>
+                              <p class="card-text-white">
+                                Funcionalidad: Llama al método
+                                detenerWebSocket(), y luego realiza una
+                                solicitud HTTP POST a la URL
+                                "http://localhost:3000/desconectar_arduino".
+                                Cuando recibe una respuesta exitosa, actualiza
+                                el mensaje de conexión y deshabilita el botón.
+                              </p>
                             </div>
                           </div>
                         </div>
                         <div class="col-md-6">
-                          <div class="card text-#EEEBD3 mb-3" id="containerInfo">
-                            <br>
-                            <img src="assets/datos.png" class="card-img-top" alt="Enviar Datos">
+                          <div
+                            class="card text-#EEEBD3 mb-3"
+                            id="containerInfo"
+                          >
+                            <br />
+                            <img
+                              src="assets/datos.png"
+                              class="card-img-top"
+                              alt="Enviar Datos"
+                            />
                             <div class="card-body">
                               <h5 class="card-title">ENVIAR DATOS</h5>
-                              <p class="card-text-white">Envía datos a Arduino.</p>
-                              <p class="card-text-white">Funcionalidad: Realiza una solicitud HTTP POST a la URL
-                                "http://localhost:3000/enviar_datos". Cuando recibe una respuesta exitosa, actualiza el
-                                mensaje de conexión.</p>
+                              <p class="card-text-white">
+                                Envía datos a Arduino.
+                              </p>
+                              <p class="card-text-white">
+                                Funcionalidad: Realiza una solicitud HTTP POST a
+                                la URL "http://localhost:3000/enviar_datos".
+                                Cuando recibe una respuesta exitosa, actualiza
+                                el mensaje de conexión.
+                              </p>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <br>
-                      <div class="row ">
+                      <br />
+                      <div class="row">
                         <div class="col-md-6">
-                          <div class="card text-#EEEBD3 mb-3" id="containerInfo">
-                            <br>
-                            <img src="assets/borrar.gif" class="card-img-top" alt="Confirmar Eliminación">
+                          <div
+                            class="card text-#EEEBD3 mb-3"
+                            id="containerInfo"
+                          >
+                            <br />
+                            <img
+                              src="assets/borrar.gif"
+                              class="card-img-top"
+                              alt="Confirmar Eliminación"
+                            />
                             <div class="card-body">
                               <h5 class="card-title">Confirmar Eliminación</h5>
-                              <p class="card-text-white">Permite al usuario confirmar la eliminación de los datos de la
-                                tabla de lectura.</p>
-                              <p class="card-text-white">Funcionalidad: Muestra un cuadro de diálogo de confirmación
-                                utilizando la biblioteca SweetAlert. Si el usuario confirma la eliminación, borra todos
-                                los elementos del arreglo lecturas y realiza una solicitud HTTP DELETE a la URL
-                                "http://localhost:3000/eliminar_datos". Si la solicitud es exitosa, muestra un mensaje
-                                de eliminación exitosa. En caso de error, muestra un mensaje de error.</p>
+                              <p class="card-text-white">
+                                Permite al usuario confirmar la eliminación de
+                                los datos de la tabla de lectura.
+                              </p>
+                              <p class="card-text-white">
+                                Funcionalidad: Muestra un cuadro de diálogo de
+                                confirmación utilizando la biblioteca
+                                SweetAlert. Si el usuario confirma la
+                                eliminación, borra todos los elementos del
+                                arreglo lecturas y realiza una solicitud HTTP
+                                DELETE a la URL
+                                "http://localhost:3000/eliminar_datos". Si la
+                                solicitud es exitosa, muestra un mensaje de
+                                eliminación exitosa. En caso de error, muestra
+                                un mensaje de error.
+                              </p>
                             </div>
                           </div>
                         </div>
                         <div class="col-md-6">
-                          <div class="card text-#EEEBD3 mb-3" id="containerInfo">
-                            <br>
-                            <img src="assets/documento.gif" class="card-img-top" alt="Confirmar Eliminación">
+                          <div
+                            class="card text-#EEEBD3 mb-3"
+                            id="containerInfo"
+                          >
+                            <br />
+                            <img
+                              src="assets/documento.gif"
+                              class="card-img-top"
+                              alt="Confirmar Eliminación"
+                            />
                             <div class="card-body">
                               <h5 class="card-title">Generar Archivo CSV</h5>
-                              <p class="card-text-white">Permite al usuario, una vez generados todos los valores
-                                importar a su propio dispositivo un archivo CSV que podrá ser abierto desde cualquier
-                                editor de hojas de calculo que se imagine.</p>
-                              <p class="card-text-white">Funcionalidad: Este botón llama al metodo, este es generarCSV()
-                                convierte el arreglo lecturas en un archivo CSV y lo descarga en el navegador del
-                                usuario. Simplificando aún más:
-                                Este método convierte y descarga el arreglo lecturas como un archivo CSV.</p>
+                              <p class="card-text-white">
+                                Permite al usuario, una vez generados todos los
+                                valores importar a su propio dispositivo un
+                                archivo CSV que podrá ser abierto desde
+                                cualquier editor de hojas de calculo que se
+                                imagine.
+                              </p>
+                              <p class="card-text-white">
+                                Funcionalidad: Este botón llama al metodo, este
+                                es generarCSV() convierte el arreglo lecturas en
+                                un archivo CSV y lo descarga en el navegador del
+                                usuario. Simplificando aún más: Este método
+                                convierte y descarga el arreglo lecturas como un
+                                archivo CSV.
+                              </p>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <br>
-                      <div class="row " style="margin-left: 25%;">
+                      <br />
+                      <div class="row" style="margin-left: 25%">
                         <div class="col-md-12">
-                          <div class="card text-#EEEBD3 mb-3" id="containerInfo">
-                            <br>
-                            <img src="assets/filtro.png" class="card-img-top" alt="Confirmar Eliminación">
+                          <div
+                            class="card text-#EEEBD3 mb-3"
+                            id="containerInfo"
+                          >
+                            <br />
+                            <img
+                              src="assets/filtro.png"
+                              class="card-img-top"
+                              alt="Confirmar Eliminación"
+                            />
                             <div class="card-body">
                               <h5 class="card-title">Filtro de datos</h5>
-                              <p class="card-text-white">Permite al usuario filtrar datos, dependiendo de lo quedesee
-                                funcionará en funcion del DNI o la fecha de las diferentes mediciones que se hagan, las
-                                cuales estarán registradas en la Base de Datos</p>
-                              <p class="card-text-white">Funcionalidad: Muestra un cuadro de diálogo donde el usuario
-                                podrá rellenar los diferentes campos para realizar la búsqueda, esto después será
-                                mostrado por pantalla.</p>
+                              <p class="card-text-white">
+                                Permite al usuario filtrar datos, dependiendo de
+                                lo quedesee funcionará en funcion del DNI o la
+                                fecha de las diferentes mediciones que se hagan,
+                                las cuales estarán registradas en la Base de
+                                Datos
+                              </p>
+                              <p class="card-text-white">
+                                Funcionalidad: Muestra un cuadro de diálogo
+                                donde el usuario podrá rellenar los diferentes
+                                campos para realizar la búsqueda, esto después
+                                será mostrado por pantalla.
+                              </p>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-
                   </div>
                 </div>
                 <div class="tab-pane" id="tab2">
                   <h1 class="text-center">Datos</h1>
-                  <p class="text-center">Se están generando datos automáticamente desde la placa de Arduino mediante tus
-                    movimientos. Compruébalos en esta tabla.</p>
-                  <hr>
-                  <button class="btn bg-dark text-#EEEBD3 toggle-button" (click)="toggleFilterSection()"
-                    style="margin-left: 40%;">Abrir/Cerrar Filtro</button>
-                  <br>
+                  <p class="text-center">
+                    Se están generando datos automáticamente desde la placa de
+                    Arduino mediante tus movimientos. Compruébalos en esta
+                    tabla.
+                  </p>
+                  <hr />
+                  <button
+                    class="btn bg-dark text-#EEEBD3 toggle-button"
+                    (click)="toggleFilterSection()"
+                    style="margin-left: 40%"
+                  >
+                    Abrir/Cerrar Filtro
+                  </button>
+                  <br />
                   <div id="filterSection" class="filter-section form-group">
                     <div class="row">
                       <div class="col">
                         <label for="filterFecha">Fecha:</label>
-                        <input id="filterFecha" type="date" [(ngModel)]="filtroFecha" class="form-control">
+                        <input
+                          id="filterFecha"
+                          type="date"
+                          [(ngModel)]="filtroFecha"
+                          class="form-control"
+                        />
                       </div>
-                      <div class="col" style="margin-left: -40%;">
+                      <div class="col" style="margin-left: -40%">
                         <label for="filterHoraMinutos">Hora y Minutos:</label>
-                        <input id="filterHoraMinutos" type="time" [(ngModel)]="filtroHoraMinutos" class="form-control">
+                        <input
+                          id="filterHoraMinutos"
+                          type="time"
+                          [(ngModel)]="filtroHoraMinutos"
+                          class="form-control"
+                        />
                       </div>
                     </div>
-                    <br>
+                    <br />
 
                     <div class="row">
                       <div class="col">
-                        <button class="btn btn-dark text-#EEEBD3" (click)="filtrarLecturas()">Filtrar</button>
+                        <button
+                          class="btn btn-dark text-#EEEBD3"
+                          (click)="filtrarLecturas()"
+                        >
+                          Filtrar
+                        </button>
 
-                        <button class="btn btn-dark text-#EEEBD3" (click)="borrarFiltro()">Borrar</button>
+                        <button
+                          class="btn btn-dark text-#EEEBD3"
+                          (click)="borrarFiltro()"
+                        >
+                          Borrar
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -262,10 +493,18 @@
                     <tbody>
                       <ng-container *ngFor="let lectura of lecturas">
                         <tr>
-                          <td style="font-size: 20px; color: #EEEBD3;">{{ lectura.id }}</td>
-                          <td style="font-size: 20px; color: #EEEBD3;">{{ lectura.fecha }}</td>
-                          <td style="font-size: 20px; color: #EEEBD3;">{{ lectura.valor }}</td>
-                          <td style="font-size: 20px; color: #EEEBD3;">{{ lectura.dni }}</td>
+                          <td style="font-size: 20px; color: #eeebd3">
+                            {{ lectura.id }}
+                          </td>
+                          <td style="font-size: 20px; color: #eeebd3">
+                            {{ lectura.fecha }}
+                          </td>
+                          <td style="font-size: 20px; color: #eeebd3">
+                            {{ lectura.valor }}
+                          </td>
+                          <td style="font-size: 20px; color: #eeebd3">
+                            {{ lectura.dni }}
+                          </td>
                         </tr>
                       </ng-container>
                     </tbody>
@@ -273,10 +512,17 @@
                 </div>
                 <div class="tab-pane" id="tab3">
                   <h1 class="text-center">Gráfica</h1>
-                  <p class="text-center">En este apartado, como puedes comprobar tendrás la gráfica, actualizada en
-                    tiempo real con los datos que te llegan por la placa de arduino</p>
+                  <p class="text-center">
+                    En este apartado, como puedes comprobar tendrás la gráfica,
+                    actualizada en tiempo real con los datos que te llegan por
+                    la placa de arduino
+                  </p>
 
-                  <div style="width: 100%; margin-left: 18%;" class="" #chartContainer></div>
+                  <div
+                    style="width: 100%; margin-left: 18%"
+                    class=""
+                    #chartContainer
+                  ></div>
                 </div>
               </div>
             </div>
@@ -285,8 +531,7 @@
       </section>
     </div>
   </div>
-  <br>
-
+  <br />
 </div>
 
 
@@ -304,6 +549,6 @@
     });
   });
 </script>
-<br>
-<br>
+<br />
+<br />
 <app-footer></app-footer>
