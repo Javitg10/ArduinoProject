@@ -318,7 +318,7 @@ export class DatosComponent implements OnInit, OnDestroy, AfterViewInit {
   //Filtrado de datos para BBDD y el array lecturas
   Filtro() {
     Swal.fire({
-      title: 'Filtro por DNI y Fecha',
+      title: 'Filtro por DNI',
       html: '<input id="dni" class="swal2-input" placeholder="DNI" type="text">',
       showCancelButton: true,
       confirmButtonText: 'Buscar',

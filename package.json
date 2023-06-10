@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "startAll": "concurrently \"ng serve\" \"forever server/ArduinoServer.js\""
+    "startAll": "concurrently \"ng serve\" \"nodemon server/ArduinoServer.js\""
   },
   "private": true,
   "dependencies": {

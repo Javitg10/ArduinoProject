@@ -107,6 +107,42 @@ app.post('/conectar_arduino', (req, res) => {
   res.json({ mensaje: 'Conexión exitosa con Arduino, puede ver sus datos..' });
 });
 
+app.post('/enviar_datos', (req, res) => {
+  const connection = mysql.createConnection({
+    host: '127.0.0.1',
+    user: 'root',
+    password: '',
+    database: 'arduino_datos',
+  });
+  // Conexión a la base de datos
+  connection.connect((err) => {
+    if (err) {
+      console.error('Error al conectar a la base de datos:', err);
+    } else {
+      console.log('Conexión a la base de datos establecida correctamente');
+      datos.forEach((lectura) => {
+        const dni = currentDni;
+        const id = lectura.id;
+        const fecha = lectura.fecha;
+        const valor = lectura.valor;
+
+        // Insertar los valores en la base de datos
+        const query = 'INSERT INTO lecturas (dni,id, valor, fecha) VALUES (?, ?, ?, ?)';
+        connection.query(query, [dni, id, valor, fecha], (error, results) => {
+          if (error) {
+            console.error('Error al insertar los datos:', error);
+            res.status(500).json({ error: 'Error al insertar los datos en la base de datos' });
+          } else {
+            console.log('Datos insertados correctamente:', results);
+          }
+        });
+      });
+      res.json({ mensaje: 'Datos correctamente enviados a la base de datos' });
+    }
+  });
+
+});
+
 app.post('/borrar_datos_actual', (req, res) => {
   //Vaciar el array datos.
   datos.splice(0, datos.length);
