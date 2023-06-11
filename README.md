@@ -6,6 +6,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
+## Full project
+
+Run `npm run startAll` for a dev server and node.js server. Navigate to `http://localhost:4200/` to see web APP. The application will automatically reload if you change any of the source files.Navigate to `http://localhost:3000/` to see express API. The node.js server will automatically reload if you change any of the source file or detect some error.
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
